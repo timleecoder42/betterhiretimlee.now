@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-import { LanguageSwitcher } from '@/app/components/language-switcher';
-import { ThemeSwitcher } from '@/app/components/theme-switcher';
+import { LanguageSwitcher } from '@/components/language-switcher';
+import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Link } from '@/i18n/routing';
 
 export function Navigation() {

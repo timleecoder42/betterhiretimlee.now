@@ -4,12 +4,12 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 
-import { BackgroundPattern } from '@/app/components/background-pattern';
-import { Navigation } from '@/app/components/navigation';
-import { Providers } from '@/app/components/providers';
+import { BackgroundPattern } from '@/components/background-pattern';
+import { Navigation } from '@/components/navigation';
+import { Providers } from '@/components/providers';
 import { Locale, isValidLocale } from '@/i18n/types';
 
-import '@/app/globals.css';
+import '@/styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 

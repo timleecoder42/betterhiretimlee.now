@@ -42,28 +42,28 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [Heroicons](https://heroicons.com/) - Beautiful hand-crafted SVG icons
 - [Lucide Icons](https://lucide.dev/) - Beautiful & consistent icons
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Environment Variables
 
-To enable GitHub integration for the projects section, you need to set up the following environment variables:
+To enable GitHub integration for the projects section:
 
 1. Create a `.env.local` file in the root directory
 2. Add the following variables:
 
 ```bash
-# Required: Your GitHub username
+# Required: GitHub username for fetching repository data
 NEXT_PUBLIC_GITHUB_USERNAME=your_github_username
 
-# Optional: GitHub personal access token
-# Add this if you want to increase the API rate limit
+# Optional: GitHub personal access token (Classic)
+# Increases API rate limit from 60 to 5000 requests per hour
 GITHUB_TOKEN=your_github_token
 ```
 
 To get a GitHub personal access token:
 
-1. Go to GitHub Settings > Developer settings > Personal access tokens
-2. Generate a new token with the `public_repo` scope
+1. Go to [GitHub Settings > Developer settings > Personal access tokens (Classic)](https://github.com/settings/tokens/new)
+2. Generate a new token (no additional scopes needed for public repositories)
 3. Copy the token and add it to your `.env.local` file
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

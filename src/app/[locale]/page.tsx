@@ -1,5 +1,5 @@
-import { HeroSection } from '@/app/components/hero-section';
-import { ProjectsContainer } from '@/app/components/projects-container';
+import { HeroSection } from '@/components/hero-section';
+import { ProjectsContainer } from '@/components/projects-container';
 
 export default function HomePage() {
   return (

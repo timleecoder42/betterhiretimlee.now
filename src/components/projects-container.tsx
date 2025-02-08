@@ -1,5 +1,5 @@
 import { getProjects } from '@/api/github';
-import ProjectsSection from '@/app/components/projects-section';
+import ProjectsSection from '@/components/projects-section';
 
 export async function ProjectsContainer() {
   const projects = await getProjects();
