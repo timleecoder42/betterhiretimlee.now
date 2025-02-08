@@ -50,23 +50,26 @@ function ProjectCard({ project }: { project: Project }) {
       </div>
       <div className="p-4">
         <div className="flex items-center gap-4">
-          <div className="flex-1 overflow-x-auto no-scrollbar">
-            <div className="flex gap-1">
-              {project.tags.map(tag => (
-                <span
-                  key={tag}
-                  className="flex-none text-sm font-mono text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-300"
-                >
-                  #{tag}
-                </span>
-              ))}
+          <div className="flex-1 relative min-w-0">
+            <div className="overflow-x-auto no-scrollbar">
+              <div className="flex gap-1 pr-12">
+                {project.tags.map(tag => (
+                  <span
+                    key={tag}
+                    className="flex-none text-sm font-mono text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-300"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
             </div>
+            <div className="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-white dark:from-gray-800 to-transparent pointer-events-none" />
           </div>
           <a
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-mono px-2 py-1 -my-1 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-all duration-300"
+            className="flex-none text-sm font-mono px-2 py-1 -my-1 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-all duration-300"
           >
             {t('viewCode')}
           </a>
