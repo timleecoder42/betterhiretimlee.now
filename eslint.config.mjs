@@ -17,6 +17,13 @@ const eslintConfig = [
       import: importPlugin,
     },
     rules: {
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+          disallowTypeAnnotations: true,
+        },
+      ],
       'import/order': [
         'error',
         {

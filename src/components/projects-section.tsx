@@ -5,7 +5,7 @@ import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import { Project } from '@/api/github';
+import type { Project } from '@/lib/github';
 
 const container = {
   hidden: { opacity: 0 },
