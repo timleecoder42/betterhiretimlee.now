@@ -1,0 +1,27 @@
+{
+  "HomePage": {
+    "title": "你好，我是Tim Lee",
+    "subtitle": "全栈开发者 & AI爱好者",
+    "about": "查看关于页面",
+    "cta": "查看作品"
+  },
+  "Navigation": {
+    "home": "首页",
+    "about": "关于",
+    "projects": "项目"
+  },
+  "Theme": {
+    "light": "浅色",
+    "dark": "深色",
+    "system": "系统"
+  },
+  "Projects": {
+    "title": "我的项目",
+    "subtitle": "这是我最近的一些作品"
+  },
+  "About": {
+    "title": "关于我",
+    "description": "我是一名热衷于构建现代网络应用的全栈开发者",
+    "skills": "我的技能"
+  }
+} 

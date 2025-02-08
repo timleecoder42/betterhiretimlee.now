@@ -1,0 +1,27 @@
+{
+  "HomePage": {
+    "title": "Hi, I'm Tim Lee",
+    "subtitle": "Full Stack Developer & AI Enthusiast",
+    "about": "Go to the about page",
+    "cta": "View My Work"
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects"
+  },
+  "Theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "Projects": {
+    "title": "My Projects",
+    "subtitle": "Here are some of my recent works"
+  },
+  "About": {
+    "title": "About Me",
+    "description": "I'm a Full Stack Developer passionate about building modern web applications",
+    "skills": "My Skills"
+  }
+} 
