@@ -1,4 +1,5 @@
 import { unstable_cache } from 'next/cache';
+import { NextResponse } from 'next/server';
 
 export type Project = {
   title: string;
@@ -36,7 +37,7 @@ interface GitHubRepo {
 }
 
 // Cache the fetch call to avoid unnecessary API calls
-export const getProjects = unstable_cache(
+const getProjects = unstable_cache(
   async () => {
     const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME;
     if (!username) {
@@ -67,13 +68,10 @@ export const getProjects = unstable_cache(
 
       // Transform the GitHub data into our Project type
       const projects: Project[] = repos
-        .filter((repo: GitHubRepo) => !repo.fork && !repo.archived && repo.name !== username) // Filter out forks, archived repos, and username repo
+        .filter((repo: GitHubRepo) => !repo.fork && !repo.archived && repo.name !== username)
         .map((repo: GitHubRepo) => {
-          // For the image, we'll use the GitHub repository's social preview image
           const image = `https://opengraph.githubassets.com/1/${username}/${repo.name}`;
           const topics = repo.topics || [];
-
-          // Filter out weight topic from displayed tags
           const displayTags = topics.filter((topic: string) => !topic.startsWith('weight-'));
 
           return {
@@ -88,7 +86,7 @@ export const getProjects = unstable_cache(
             weight: getWeightFromTopics(topics),
           };
         })
-        .sort((a: Project, b: Project) => a.weight - b.weight); // Sort by weight in ascending order
+        .sort((a: Project, b: Project) => a.weight - b.weight);
 
       return projects;
     } catch (error) {
@@ -98,7 +96,17 @@ export const getProjects = unstable_cache(
   },
   ['github-projects'],
   {
-    revalidate: 3600, // Revalidate every hour
+    revalidate: 3600,
     tags: ['github-projects'],
   }
 );
+
+export async function GET() {
+  try {
+    const projects = await getProjects();
+    return NextResponse.json(projects);
+  } catch (error: unknown) {
+    console.error('Error in GitHub API route:', error);
+    return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500 });
+  }
+}

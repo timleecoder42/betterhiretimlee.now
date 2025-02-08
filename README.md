@@ -67,11 +67,20 @@ To enable GitHub integration for the projects section:
 2. Add the following variables:
 
 ```bash
-# Required: GitHub username for fetching repository data
+# Required: Your GitHub username for fetching repository data
+# This is used to fetch your public repositories
 NEXT_PUBLIC_GITHUB_USERNAME=your_github_username
+
+# Required: The base URL of your application
+# Used for server-side API calls
+# In production, this should be your deployed URL (e.g., https://example.com)
+# For local development, use http://localhost:3000
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 
 # Optional: GitHub personal access token (Classic)
 # Increases API rate limit from 60 to 5000 requests per hour
+# Generate at: https://github.com/settings/tokens/new
+# No additional scopes needed for public repositories
 GITHUB_TOKEN=your_github_token
 ```
 
