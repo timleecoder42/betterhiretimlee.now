@@ -10,6 +10,7 @@ A modern, internationalized portfolio website built with Next.js 15 and React 19
 - 📱 Responsive design with Tailwind CSS
 - 🧩 Modern UI components using Headless UI
 - ⚡ Fast development with Turbopack
+- 🖼️ Dynamic OG images for social sharing
 
 ## Getting Started
 
@@ -41,6 +42,22 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [TypeScript](https://www.typescriptlang.org/) - Type safety
 - [Heroicons](https://heroicons.com/) - Beautiful hand-crafted SVG icons
 - [Lucide Icons](https://lucide.dev/) - Beautiful & consistent icons
+- [@vercel/og](https://vercel.com/docs/functions/edge-functions/og-image-generation) - Dynamic OG image generation
+
+## Social Sharing
+
+The website includes dynamic Open Graph (OG) image generation for better social media sharing. When your site is shared on platforms like Twitter, LinkedIn, or Facebook, it will display a beautiful preview image with:
+
+- Your profile picture
+- The page title
+- Your role description
+- A beautiful gradient background with decorative blobs
+
+The OG images are generated on-demand using the `@vercel/og` library and Edge Functions. You can test how your pages will look when shared by visiting:
+
+```
+https://your-domain.com/api/og?title=Your+Page+Title
+```
 
 ## Environment Variables
 
