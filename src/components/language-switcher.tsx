@@ -10,6 +10,7 @@ import { usePathname, useRouter } from '@/i18n/routing';
 const languages = [
   { id: 'en', name: 'English' },
   { id: 'zh', name: '中文' },
+  { id: 'ja', name: '日本語' },
 ];
 
 export function LanguageSwitcher() {
