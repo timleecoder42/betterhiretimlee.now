@@ -1,14 +1,10 @@
 'use client';
 
-import { useTheme } from 'next-themes';
 import { Menu, Transition } from '@headlessui/react';
-import {
-  SunIcon,
-  MoonIcon,
-  ComputerDesktopIcon,
-} from '@heroicons/react/24/outline';
-import { Fragment } from 'react';
+import { SunIcon, MoonIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
 import { useTranslations } from 'next-intl';
+import { useTheme } from 'next-themes';
+import { Fragment } from 'react';
 
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();

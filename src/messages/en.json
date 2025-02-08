@@ -11,8 +11,7 @@
   },
   "Navigation": {
     "home": "Home",
-    "about": "About",
-    "projects": "Projects"
+    "about": "About"
   },
   "Theme": {
     "light": "Light",

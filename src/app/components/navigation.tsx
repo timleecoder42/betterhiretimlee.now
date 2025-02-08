@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
-import { ThemeSwitcher } from '@/app/components/theme-switcher';
-import { LanguageSwitcher } from '@/app/components/language-switcher';
 import { Menu, X } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+
+import { LanguageSwitcher } from '@/app/components/language-switcher';
+import { ThemeSwitcher } from '@/app/components/theme-switcher';
 import { Link } from '@/i18n/routing';
 
 export function Navigation() {
@@ -17,7 +18,6 @@ export function Navigation() {
   const links = [
     { href: '/', label: t('home') },
     { href: '/about', label: t('about') },
-    { href: '/projects', label: t('projects') },
   ];
 
   return (
@@ -67,11 +67,7 @@ export function Navigation() {
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none"
             >
-              {isOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>

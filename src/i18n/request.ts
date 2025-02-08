@@ -1,4 +1,5 @@
 import { getRequestConfig } from 'next-intl/server';
+
 import { routing } from '@/i18n/routing';
 import { isValidLocale } from '@/i18n/types';
 

@@ -1,9 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/routing';
 import { ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+
+import ProjectsSection from '@/app/components/projects-section';
+import { Link } from '@/i18n/routing';
 
 export default function HomePage() {
   const t = useTranslations('HomePage');
@@ -15,7 +17,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-3xl mx-auto text-center"
+          className="max-w-3xl mx-auto text-center mb-20"
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
             {t('title')}
@@ -29,6 +31,8 @@ export default function HomePage() {
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </motion.div>
+
+        <ProjectsSection />
       </div>
     </div>
   );

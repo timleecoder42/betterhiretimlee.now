@@ -1,11 +1,13 @@
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
-import { notFound } from 'next/navigation';
+
 import { Navigation } from '@/app/components/navigation';
 import { Providers } from '@/app/components/providers';
-import { Inter } from 'next/font/google';
 import { Locale, isValidLocale } from '@/i18n/types';
-import type { Metadata } from 'next';
+
 import '@/app/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });

@@ -1,10 +1,11 @@
 'use client';
 
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
 import { LanguagesIcon } from 'lucide-react';
-import { usePathname, useRouter } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
+import { Fragment } from 'react';
+
+import { usePathname, useRouter } from '@/i18n/routing';
 
 const languages = [
   { id: 'en', name: 'English' },
