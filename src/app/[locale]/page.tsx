@@ -20,9 +20,7 @@ export default function HomePage() {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
             {t('title')}
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-            {t('subtitle')}
-          </p>
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">{t('subtitle')}</p>
           <Link
             href="/about"
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors"

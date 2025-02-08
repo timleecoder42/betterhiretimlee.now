@@ -1,4 +1,8 @@
 {
+  "Metadata": {
+    "title": "Tim Lee - Full Stack Developer",
+    "description": "Personal portfolio and blog of Tim Lee, a Full Stack Developer specializing in modern web technologies and AI tools."
+  },
   "HomePage": {
     "title": "Hi, I'm Tim Lee",
     "subtitle": "Full Stack Developer & AI Enthusiast",
@@ -24,4 +28,4 @@
     "description": "I'm a Full Stack Developer passionate about building modern web applications",
     "skills": "My Skills"
   }
-} 
+}

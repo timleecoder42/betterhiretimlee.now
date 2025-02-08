@@ -1,10 +1,12 @@
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Navigation } from '@/app/components/navigation';
 import { Providers } from '@/app/components/providers';
 import { Inter } from 'next/font/google';
 import { Locale, isValidLocale } from '@/i18n/types';
+import type { Metadata } from 'next';
+import '@/app/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -12,6 +14,16 @@ type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: Locale }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+
+  return {
+    title: t('title'),
+    description: t('description'),
+  };
+}
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
