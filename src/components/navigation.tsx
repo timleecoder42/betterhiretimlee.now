@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -25,8 +26,15 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <Link href="/" className="text-xl font-bold">
-              Tim Lee
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/timleecoder42.jpg"
+                alt="Tim Lee"
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
+              <span className="ml-2 text-xl font-bold">Tim Lee</span>
             </Link>
           </div>
 
