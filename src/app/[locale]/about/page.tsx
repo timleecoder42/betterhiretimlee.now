@@ -49,12 +49,8 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto text-center mb-16"
         >
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
-            {t('title')}
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
-            {t('description')}
-          </p>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">{t('title')}</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300">{t('description')}</p>
         </motion.div>
 
         <div className="mt-20">

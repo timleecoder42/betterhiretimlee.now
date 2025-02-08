@@ -20,7 +20,9 @@
   },
   "Projects": {
     "title": "My Projects",
-    "subtitle": "Here are some of my recent works"
+    "subtitle": "Here are some of my recent works",
+    "visitDemo": "Visit Demo",
+    "viewCode": "View Code"
   },
   "About": {
     "title": "About Me",

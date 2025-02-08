@@ -1,11 +1,11 @@
 {
   "Metadata": {
     "title": "Tim Lee - 全栈开发者",
-    "description": "Tim Lee的个人作品集和博客，专注于现代网络技术和AI工具开发的全栈开发者。"
+    "description": "Tim Lee 的个人作品集和博客，专注于现代网络技术和 AI 工具开发的全栈开发者。"
   },
   "HomePage": {
-    "title": "你好，我是Tim Lee",
-    "subtitle": "全栈开发者 & AI爱好者",
+    "title": "你好，我是 Tim Lee",
+    "subtitle": "全栈开发者 & AI 爱好者",
     "about": "查看关于页面",
     "cta": "查看作品"
   },
@@ -20,7 +20,9 @@
   },
   "Projects": {
     "title": "我的项目",
-    "subtitle": "这是我最近的一些作品"
+    "subtitle": "这是我最近的一些作品",
+    "visitDemo": "查看演示",
+    "viewCode": "查看代码"
   },
   "About": {
     "title": "关于我",

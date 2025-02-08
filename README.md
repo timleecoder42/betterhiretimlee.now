@@ -45,3 +45,25 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Environment Variables
+
+To enable GitHub integration for the projects section, you need to set up the following environment variables:
+
+1. Create a `.env.local` file in the root directory
+2. Add the following variables:
+
+```bash
+# Required: Your GitHub username
+NEXT_PUBLIC_GITHUB_USERNAME=your_github_username
+
+# Optional: GitHub personal access token
+# Add this if you want to increase the API rate limit
+GITHUB_TOKEN=your_github_token
+```
+
+To get a GitHub personal access token:
+
+1. Go to GitHub Settings > Developer settings > Personal access tokens
+2. Generate a new token with the `public_repo` scope
+3. Copy the token and add it to your `.env.local` file
