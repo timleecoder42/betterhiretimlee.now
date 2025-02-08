@@ -7,7 +7,8 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import { BackgroundPattern } from '@/components/background-pattern';
 import { Navigation } from '@/components/navigation';
 import { Providers } from '@/components/providers';
-import { Locale, isValidLocale } from '@/i18n/types';
+import type { Locale } from '@/i18n/types';
+import { isValidLocale } from '@/i18n/types';
 
 import '@/styles/globals.css';
 
