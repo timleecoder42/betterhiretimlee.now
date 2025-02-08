@@ -1,23 +1,23 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { routing } from '@/i18n/routing';
 import { Navigation } from '@/app/components/navigation';
 import { Providers } from '@/app/components/providers';
 import { Inter } from 'next/font/google';
+import { Locale, isValidLocale } from '@/i18n/types';
 
 const inter = Inter({ subsets: ['latin'] });
 
 type Props = {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: Locale }>;
 };
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!isValidLocale(locale)) {
     notFound();
   }
 
