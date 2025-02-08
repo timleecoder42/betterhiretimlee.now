@@ -39,7 +39,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 mb-8"
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 dark:from-white dark:via-gray-100 dark:to-gray-300 mb-8"
         >
           {t('title')}
         </motion.h1>
@@ -47,7 +47,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="text-xl sm:text-2xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed"
+          className="text-xl sm:text-2xl text-gray-700 dark:text-gray-200 max-w-2xl mx-auto leading-relaxed"
         >
           {t('subtitle')}
         </motion.p>

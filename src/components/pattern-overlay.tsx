@@ -24,7 +24,7 @@ export function PatternOverlay() {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none dark:before:absolute dark:before:inset-0 dark:before:bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] dark:before:bg-[length:40px_40px] dark:before:bg-center"
       style={{
         backgroundImage: `
           linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
@@ -35,17 +35,6 @@ export function PatternOverlay() {
         transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
         transition: 'transform 0.3s ease-out',
       }}
-    >
-      <div
-        className="absolute inset-0 dark:opacity-50"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle at center, rgba(0, 0, 0, 0.05) 0%, transparent 1px)
-          `,
-          backgroundSize: '40px 40px',
-          backgroundPosition: '20px 20px',
-        }}
-      />
-    </div>
+    />
   );
 }
