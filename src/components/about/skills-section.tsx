@@ -13,25 +13,29 @@ const skills = [
   {
     category: 'skillCategories.frontend',
     icon: <CodeBracketIcon className="w-6 h-6" />,
-    gradient: 'from-pink-500/90 to-rose-600/90 dark:from-pink-400/90 dark:to-rose-500/90',
+    gradient: 'from-pink-500/40 to-rose-600/40 dark:from-pink-400/90 dark:to-rose-500/90',
+    iconGradient: 'from-pink-500 to-rose-600 dark:from-pink-400 dark:to-rose-500',
     items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
   },
   {
     category: 'skillCategories.aiTools',
     icon: <CpuChipIcon className="w-6 h-6" />,
-    gradient: 'from-purple-500/90 to-indigo-600/90 dark:from-purple-400/90 dark:to-indigo-500/90',
+    gradient: 'from-purple-500/40 to-indigo-600/40 dark:from-purple-400/90 dark:to-indigo-500/90',
+    iconGradient: 'from-purple-500 to-indigo-600 dark:from-purple-400 dark:to-indigo-500',
     items: ['Cursor', 'v0.dev', 'bolt.new', 'ChatGPT', 'GitHub Copilot'],
   },
   {
     category: 'skillCategories.web3',
     icon: <CommandLineIcon className="w-6 h-6" />,
-    gradient: 'from-emerald-500/90 to-teal-600/90 dark:from-emerald-400/90 dark:to-teal-500/90',
+    gradient: 'from-emerald-500/40 to-teal-600/40 dark:from-emerald-400/90 dark:to-teal-500/90',
+    iconGradient: 'from-emerald-500 to-teal-600 dark:from-emerald-400 dark:to-teal-500',
     items: ['Solidity', 'Hardhat', 'thirdweb', 'Ethers.js', 'OpenZeppelin'],
   },
   {
     category: 'skillCategories.other',
     icon: <Cog6ToothIcon className="w-6 h-6" />,
-    gradient: 'from-amber-500/90 to-orange-600/90 dark:from-amber-400/90 dark:to-orange-500/90',
+    gradient: 'from-amber-500/40 to-orange-600/40 dark:from-amber-400/90 dark:to-orange-500/90',
+    iconGradient: 'from-amber-500 to-orange-600 dark:from-amber-400 dark:to-orange-500',
     items: ['Git', 'Linux', 'Raspberry Pi', 'CI/CD', 'Agile'],
   },
 ];
@@ -119,10 +123,7 @@ export function SkillsSection() {
               className="relative group"
             >
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${skillGroup.gradient.replace(
-                  '/90',
-                  '/10'
-                )} rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300`}
+                className={`absolute inset-0 bg-gradient-to-br ${skillGroup.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300`}
               />
               <motion.div
                 initial={{ scale: 0.95 }}
@@ -134,7 +135,7 @@ export function SkillsSection() {
                 <div className="relative p-6 sm:p-8">
                   <div className="flex items-center gap-4 mb-6">
                     <span
-                      className={`flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${skillGroup.gradient} text-white`}
+                      className={`flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${skillGroup.iconGradient} text-white`}
                     >
                       <motion.div
                         initial={{ rotate: 0 }}
