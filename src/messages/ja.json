@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "title": "Tim Lee — Web開発者 & AIマニア",
-    "description": "Tim Leeのポートフォリオとブログ。AI Agentsとの対話を通じてモダンなウェブアプリケーションを構築することに情熱を注ぐWeb開発者です。"
+    "description": "Tim Leeのポートフォリオとブログ。AI Agentsとの対話を通じてモダンなWeb Appsを構築することに情熱を注ぐ開発者です。"
   },
   "HomePage": {
     "title": "こんにちは、Tim Leeです",
@@ -26,7 +26,25 @@
   },
   "About": {
     "title": "プロフィール",
-    "description": "AI Agentsとの対話を通じてモダンなウェブアプリケーションを構築することに情熱を注ぐWeb開発者です",
-    "skills": "スキル"
+    "description": "AI Agentsとの対話を通じてモダンなWeb Appsを構築することに情熱を注ぐ開発者です",
+    "skills": "スキル",
+    "skillsDescription": "使用している技術とツール",
+    "skillCategories": {
+      "frontend": "フロントエンド",
+      "aiTools": "AIツール",
+      "web3": "Web3",
+      "other": "その他"
+    },
+    "greeting": "ようこそ",
+    "contactMe": "お問い合わせ",
+    "experience": "経歴",
+    "experienceDescription": "Web開発とAIの分野での私の歩み",
+    "currentRole": "Web開発者 & AIマニア",
+    "currentRoleDescription": "AI Agentsとの対話を通じてモダンなWeb開発を行い、新しい開発手法を探求しています。",
+    "experienceDetails": {
+      "buildingApps": "Next.jsとTypeScriptを使用したモダンなWeb開発",
+      "leveragingAI": "AIツールを活用した開発効率の向上",
+      "exploring": "革新的な開発アプローチの探求"
+    }
   }
 }

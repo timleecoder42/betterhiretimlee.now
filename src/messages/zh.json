@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "title": "Tim Lee — Web 开发者 & AI 狂热者",
-    "description": "Tim Lee 的个人作品集和博客，热衷于与 AI Agents 对话构建现代网络应用的 Web 开发者。"
+    "description": "Tim Lee 的个人作品集和博客，热衷于与 AI Agents 对话构建现代 Web Apps 的开发者。"
   },
   "HomePage": {
     "title": "你好，我是 Tim Lee",
@@ -26,7 +26,25 @@
   },
   "About": {
     "title": "关于我",
-    "description": "我是一名热衷于与 AI Agents 对话构建现代网络应用的 Web 开发者",
-    "skills": "我的技能"
+    "description": "我是一名热衷于与 AI Agents 对话构建现代 Web Apps 的开发者",
+    "skills": "我的技能",
+    "skillsDescription": "我使用的技术和工具",
+    "skillCategories": {
+      "frontend": "前端开发",
+      "aiTools": "AI 工具",
+      "web3": "Web3",
+      "other": "其他"
+    },
+    "greeting": "欢迎",
+    "contactMe": "联系我",
+    "experience": "经历",
+    "experienceDescription": "我在 Web 开发和 AI 领域的历程",
+    "currentRole": "Web 开发者 & AI 狂热者",
+    "currentRoleDescription": "目前专注于通过与 AI Agents 对话构建现代 Web 应用，探索创新的开发方式。",
+    "experienceDetails": {
+      "buildingApps": "使用 Next.js 和 TypeScript 构建现代 Web 应用",
+      "leveragingAI": "利用 AI 工具提升开发效率",
+      "exploring": "探索创新的软件开发方法"
+    }
   }
 }

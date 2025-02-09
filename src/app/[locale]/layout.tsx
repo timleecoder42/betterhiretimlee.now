@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 
-import { BackgroundPattern } from '@/components/background-pattern';
-import { Navigation } from '@/components/navigation';
+import { Navigation } from '@/components/layout/navigation';
 import { Providers } from '@/components/providers';
+import { BackgroundPattern } from '@/components/ui/background-gradient';
 import type { Locale } from '@/i18n/types';
 import { isValidLocale } from '@/i18n/types';
 
@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const subtitle = homeT('subtitle');
 
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
     title,
     description,
     openGraph: {
@@ -69,7 +70,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <Providers>
           <NextIntlClientProvider messages={messages}>
             <Navigation />
-            <main className="min-h-screen">{children}</main>
+            <main className="min-h-screen pb-32">{children}</main>
             <BackgroundPattern />
           </NextIntlClientProvider>
         </Providers>

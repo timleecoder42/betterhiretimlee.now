@@ -1,9 +1,9 @@
-import { HeroSection } from '@/components/hero-section';
-import { ProjectsContainer } from '@/components/projects-container';
+import { HeroSection } from '@/components/home/hero-section';
+import { ProjectsContainer } from '@/components/home/projects-container';
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+    <div className="min-h-screen">
       <HeroSection />
       <ProjectsContainer />
     </div>

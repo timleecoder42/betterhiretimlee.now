@@ -1,10 +1,10 @@
 {
   "Metadata": {
     "title": "Tim Lee — Web Developer & AI Enthusiast",
-    "description": "Personal portfolio and blog of Tim Lee, a Web Developer passionate about building modern web applications through conversations with AI Agents."
+    "description": "Personal portfolio and blog of Tim Lee, a Web Developer passionate about building modern web apps through conversations with AI Agents."
   },
   "HomePage": {
-    "title": "Hi, I’m Tim Lee",
+    "title": "Hi, I'm Tim Lee",
     "subtitle": "Web Developer & AI Enthusiast"
   },
   "Navigation": {
@@ -24,7 +24,25 @@
   },
   "About": {
     "title": "About Me",
-    "description": "I’m a Web Developer passionate about building modern web applications through conversations with AI Agents",
-    "skills": "My Skills"
+    "description": "I'm a Web Developer passionate about building modern web apps through conversations with AI Agents.",
+    "skills": "My Skills",
+    "skillsDescription": "A collection of technologies and tools I work with",
+    "skillCategories": {
+      "frontend": "Frontend",
+      "aiTools": "AI Tools",
+      "web3": "Web3",
+      "other": "Other"
+    },
+    "greeting": "Welcome",
+    "contactMe": "Contact Me",
+    "experience": "Experience",
+    "experienceDescription": "My journey in web development and AI",
+    "currentRole": "Web Developer & AI Enthusiast",
+    "currentRoleDescription": "Currently focused on building modern web applications through conversations with AI Agents, exploring new ways to enhance development workflows.",
+    "experienceDetails": {
+      "buildingApps": "Building modern web applications with Next.js and TypeScript",
+      "leveragingAI": "Leveraging AI tools to enhance development workflow",
+      "exploring": "Exploring innovative approaches to software development"
+    }
   }
 }

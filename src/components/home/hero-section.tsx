@@ -4,7 +4,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
-import { PatternOverlay } from './pattern-overlay';
+import { PatternOverlay } from '@/components/ui/background-pattern';
+
 export function HeroSection() {
   const t = useTranslations('HomePage');
   const { scrollY } = useScroll();
@@ -19,7 +20,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <motion.div
+    <motion.section
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -52,6 +53,6 @@ export function HeroSection() {
           {t('subtitle')}
         </motion.p>
       </motion.div>
-    </motion.div>
+    </motion.section>
   );
 }
