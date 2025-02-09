@@ -22,9 +22,11 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Metadata' });
+  const homeT = await getTranslations({ locale, namespace: 'HomePage' });
 
   const title = t('title');
   const description = t('description');
+  const subtitle = homeT('subtitle');
 
   return {
     title,
@@ -34,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       images: [
         {
-          url: `/api/og?title=${encodeURIComponent(title)}`,
+          url: `/api/og?title=Tim%20Lee&subtitle=${encodeURIComponent(subtitle)}`,
           width: 1200,
           height: 630,
         },
@@ -44,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title,
       description,
-      images: [`/api/og?title=${encodeURIComponent(title)}`],
+      images: [`/api/og?title=Tim%20Lee&subtitle=${encodeURIComponent(subtitle)}`],
     },
   };
 }

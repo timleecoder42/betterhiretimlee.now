@@ -5,8 +5,12 @@ export const runtime = 'edge';
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const title = searchParams.get('title') || 'Tim Lee';
+    // Parse URL parameters with ampersand fix
+    const url = new URL(req.url.replace(/&amp%3B/g, '&').replace(/&amp;/g, '&'));
+    const title = decodeURIComponent(url.searchParams.get('title') || 'Tim Lee');
+    const subtitle = decodeURIComponent(
+      url.searchParams.get('subtitle') || 'Web Developer & AI Enthusiast'
+    );
 
     return new ImageResponse(
       (
@@ -112,7 +116,7 @@ export async function GET(req: NextRequest) {
                 textShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
               }}
             >
-              Software Engineer & AI Enthusiast
+              {subtitle}
             </div>
           </div>
         </div>
