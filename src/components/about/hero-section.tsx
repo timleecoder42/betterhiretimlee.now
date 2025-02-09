@@ -74,7 +74,7 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="text-base sm:text-lg lg:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl mb-8 lg:mb-12 space-y-4 lg:space-y-6 px-4 lg:px-0"
+            className="text-sm sm:text-lg lg:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl mb-8 lg:mb-12 space-y-4 lg:space-y-6 px-4 lg:px-0"
           >
             <AnimatedText text={t('description')} />
           </motion.p>
