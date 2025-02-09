@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
+import React from 'react';
 
 import { PatternOverlay } from '@/components/ui/background-pattern';
 
@@ -42,7 +43,18 @@ export function HeroSection() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 dark:from-white dark:via-gray-100 dark:to-gray-300 mb-8"
         >
-          {t('title')}
+          {t('title')
+            .split('Tim Lee')
+            .map((part, i, arr) =>
+              i === arr.length - 1 ? (
+                <span key={i}>{part}</span>
+              ) : (
+                <React.Fragment key={i}>
+                  {part}
+                  <span className="whitespace-nowrap">Tim Lee</span>
+                </React.Fragment>
+              )
+            )}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
