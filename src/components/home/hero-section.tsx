@@ -41,7 +41,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 dark:from-white dark:via-gray-100 dark:to-gray-300 mb-8"
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 dark:from-white dark:via-gray-100 dark:to-gray-300 mb-8 whitespace-normal"
         >
           {t('title')
             .split('Tim Lee')
@@ -50,8 +50,8 @@ export function HeroSection() {
                 <span key={i}>{part}</span>
               ) : (
                 <React.Fragment key={i}>
-                  {part}
-                  <span className="whitespace-nowrap">Tim Lee</span>
+                  <span className="inline-block">{part}</span>
+                  <span className="whitespace-nowrap inline-block">Tim Lee</span>
                 </React.Fragment>
               )
             )}
