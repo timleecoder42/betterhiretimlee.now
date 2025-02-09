@@ -47,11 +47,11 @@ export function HeroSection() {
             .split('Tim Lee')
             .map((part, i, arr) =>
               i === arr.length - 1 ? (
-                <span key={i}>{part}</span>
+                <span key={i}>{part.replace(/ /g, '\u00A0')}</span>
               ) : (
                 <React.Fragment key={i}>
-                  <span className="inline-block">{part}</span>
-                  <span className="whitespace-nowrap inline-block">Tim Lee</span>
+                  <span className="inline-block">{part.replace(/ /g, '\u00A0')}</span>
+                  <span className="whitespace-nowrap inline-block">Tim&nbsp;Lee</span>
                 </React.Fragment>
               )
             )}
