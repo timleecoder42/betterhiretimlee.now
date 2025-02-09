@@ -4,7 +4,7 @@ import { SkillsSection } from '@/components/about/skills-section';
 
 export default function About() {
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full pb-48">
       {/* Hero Section */}
       <HeroSection />
 

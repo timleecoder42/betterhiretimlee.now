@@ -4,12 +4,13 @@
     "description": "Personal portfolio and blog of Tim Lee, a Web Developer passionate about building modern web apps through conversations with AI Agents."
   },
   "HomePage": {
-    "title": "Hi, I’m Tim Lee",
+    "title": "Hi, I'm Tim Lee",
     "subtitle": "Web Developer & AI Enthusiast"
   },
   "Navigation": {
     "home": "Home",
-    "about": "About"
+    "about": "About",
+    "blog": "Blog"
   },
   "Theme": {
     "light": "Light",
@@ -24,7 +25,7 @@
   },
   "About": {
     "title": "About Me",
-    "description": "I’m a Web Developer passionate about building modern web apps through conversations with AI Agents.",
+    "description": "I'm a Web Developer passionate about building modern web apps through conversations with AI Agents.",
     "skills": "My Skills",
     "skillsDescription": "A collection of technologies and tools I work with",
     "skillCategories": {
@@ -44,5 +45,10 @@
       "leveragingAI": "Leveraging AI tools to enhance development workflow",
       "exploring": "Exploring innovative approaches to software development"
     }
+  },
+  "Blog": {
+    "title": "Latest Blog Posts",
+    "description": "Thoughts, ideas, and stories about technology, design, and life.",
+    "readMore": "Read more"
   }
 }

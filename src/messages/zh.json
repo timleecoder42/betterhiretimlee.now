@@ -11,7 +11,8 @@
   },
   "Navigation": {
     "home": "首页",
-    "about": "关于"
+    "about": "关于",
+    "blog": "博客"
   },
   "Theme": {
     "light": "浅色",
@@ -46,5 +47,10 @@
       "leveragingAI": "利用 AI 工具提升开发效率",
       "exploring": "探索创新的软件开发方法"
     }
+  },
+  "Blog": {
+    "title": "最新博客文章",
+    "description": "关于技术、设计和生活的思考、想法和故事。",
+    "readMore": "阅读更多"
   }
 }
