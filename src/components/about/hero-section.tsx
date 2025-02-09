@@ -94,7 +94,7 @@ export function HeroSection() {
               <span className="relative z-10 flex items-center gap-2">
                 {t('contactMe')}
                 <svg
-                  className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                  className="w-5 h-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
