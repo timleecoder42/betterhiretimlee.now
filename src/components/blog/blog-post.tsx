@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
+import { BlogPostHeader } from '@/components/blog/blog-post-header';
 import type { BlogPost } from '@/lib/blog';
 
-import { BlogPostHeader } from './blog-post-header';
 
 type MDXComponentProps = {
   children?: React.ReactNode;
@@ -53,12 +53,17 @@ const components = {
       {...props}
     />
   ),
-  code: ({ className = '', ...props }: MDXComponentProps) => (
-    <code
-      className={`rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800 dark:bg-gray-800 dark:text-gray-200 ${className}`}
-      {...props}
-    />
-  ),
+  code: ({ className = '', ...props }: MDXComponentProps) => {
+    // If className contains a language (e.g., "language-typescript"), it's a code block
+    const isCodeBlock = className?.includes('language-');
+
+    return (
+      <code
+        className={`rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800 dark:bg-gray-800 dark:text-gray-200 ${isCodeBlock ? 'block w-full' : ''} ${className}`}
+        {...props}
+      />
+    );
+  },
   pre: ({ className = '', ...props }: MDXComponentProps) => (
     <pre
       className={`mb-6 overflow-x-auto rounded-lg bg-gray-100 p-4 dark:bg-gray-800 ${className}`}

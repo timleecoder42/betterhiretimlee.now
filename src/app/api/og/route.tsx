@@ -1,131 +1,64 @@
 import { ImageResponse } from '@vercel/og';
 import type { NextRequest } from 'next/server';
 
+import { OgBackground } from '@/components/og/og-background';
+import { OgContentBlog } from '@/components/og/og-content-blog';
+import { OgContentSite } from '@/components/og/og-content-site';
+import { OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT, OG_IMAGE_BACKGROUND } from '@/constants/og';
+
 export const runtime = 'edge';
+
+const getContent = (type: string, params: URLSearchParams, origin: string) => {
+  switch (type) {
+    case 'blog': {
+      const title = params.get('title');
+      if (!title) throw new Error('Missing title parameter');
+      return {
+        component: (
+          <OgContentBlog
+            title={title}
+            date={params.get('date') || undefined}
+            excerpt={params.get('excerpt') || undefined}
+            author={{
+              name: 'Tim Lee',
+              avatar: `${origin}/timleecoder42.jpg`,
+            }}
+          />
+        ),
+        background: OG_IMAGE_BACKGROUND.light,
+      };
+    }
+    default: {
+      const title = decodeURIComponent(params.get('title') || 'Tim Lee');
+      const subtitle = decodeURIComponent(
+        params.get('subtitle') || 'Web Developer & AI Enthusiast'
+      );
+      return {
+        component: (
+          <OgContentSite
+            title={title}
+            subtitle={subtitle}
+            imageUrl={`${origin}/timleecoder42.jpg`}
+          />
+        ),
+      };
+    }
+  }
+};
 
 export async function GET(req: NextRequest) {
   try {
-    // Parse URL parameters with ampersand fix
     const url = new URL(req.url.replace(/&amp%3B/g, '&').replace(/&amp;/g, '&'));
-    const title = decodeURIComponent(url.searchParams.get('title') || 'Tim Lee');
-    const subtitle = decodeURIComponent(
-      url.searchParams.get('subtitle') || 'Web Developer & AI Enthusiast'
+    const { component, background } = getContent(
+      url.searchParams.get('type') || 'site',
+      url.searchParams,
+      req.nextUrl.origin
     );
 
-    return new ImageResponse(
-      (
-        <div
-          style={{
-            height: '100%',
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#f8fafc',
-            position: 'relative',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Background gradient */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background:
-                'linear-gradient(to bottom right, rgba(59, 130, 246, 0.2), rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2))',
-              zIndex: 0,
-            }}
-          />
-
-          {/* Decorative blobs */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '-160px',
-              right: '-160px',
-              width: '480px',
-              height: '480px',
-              background: 'rgba(168, 85, 247, 0.2)',
-              borderRadius: '100%',
-              filter: 'blur(32px)',
-              opacity: 0.8,
-              zIndex: 1,
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '-160px',
-              left: '-160px',
-              width: '480px',
-              height: '480px',
-              background: 'rgba(59, 130, 246, 0.2)',
-              borderRadius: '100%',
-              filter: 'blur(32px)',
-              opacity: 0.8,
-              zIndex: 1,
-            }}
-          />
-
-          {/* Content */}
-          <div
-            style={{
-              position: 'relative',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '40px',
-              gap: '20px',
-              zIndex: 3,
-            }}
-          >
-            {/* Using img instead of next/image because this is an edge runtime API route */}
-            <img
-              src={`${req.nextUrl.origin}/timleecoder42.jpg`}
-              alt="Tim Lee"
-              width="180"
-              height="180"
-              style={{
-                borderRadius: '50%',
-                border: '4px solid rgba(255, 255, 255, 0.8)',
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
-              }}
-            />
-            <div
-              style={{
-                display: 'flex',
-                fontSize: 72,
-                fontWeight: 'bold',
-                color: '#0f172a',
-                textAlign: 'center',
-                lineHeight: 1.2,
-                marginTop: '20px',
-                textShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-              }}
-            >
-              {title}
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                fontSize: 36,
-                color: '#334155',
-                textAlign: 'center',
-                textShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
-              }}
-            >
-              {subtitle}
-            </div>
-          </div>
-        </div>
-      ),
-      {
-        width: 1200,
-        height: 630,
-      }
-    );
+    return new ImageResponse(<OgBackground background={background}>{component}</OgBackground>, {
+      width: OG_IMAGE_WIDTH,
+      height: OG_IMAGE_HEIGHT,
+    });
   } catch (error: unknown) {
     console.log(`${error instanceof Error ? error.message : 'Failed to generate image'}`);
     return new Response(`Failed to generate the image`, {

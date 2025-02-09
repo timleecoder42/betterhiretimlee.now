@@ -3,7 +3,7 @@ import { getAllPosts } from '@/lib/blog';
 
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const posts = getAllPosts(locale);
+  const posts = await getAllPosts(locale);
 
   return <BlogList posts={posts} />;
 }

@@ -26,18 +26,20 @@ export function Navigation() {
     <nav className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
+          <Link
+            href="/"
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity group"
+          >
+            <div className="flex-shrink-0 relative w-8 h-8 transition-all duration-300 group-hover:-rotate-6 group-hover:scale-110">
               <Image
                 src="/timleecoder42.jpg"
                 alt="Tim Lee"
-                width={32}
-                height={32}
-                className="rounded-full"
+                fill
+                className="rounded-full object-cover"
               />
-              <span className="ml-2 text-xl font-bold">Tim Lee</span>
-            </Link>
-          </div>
+            </div>
+            <span className="text-lg font-semibold tracking-tight">Tim Lee</span>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-8">
