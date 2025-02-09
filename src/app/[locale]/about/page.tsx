@@ -1,5 +1,6 @@
 'use client';
 
+import { CheckIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 
@@ -84,17 +85,7 @@ export default function About() {
                       key={skillIndex}
                       className="text-gray-600 dark:text-gray-300 flex items-center"
                     >
-                      <svg
-                        className="h-4 w-4 text-blue-500 mr-2"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path d="M5 13l4 4L19 7" />
-                      </svg>
+                      <CheckIcon className="h-4 w-4 text-blue-500 mr-2" aria-hidden="true" />
                       {skill}
                     </li>
                   ))}
