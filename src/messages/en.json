@@ -1,13 +1,11 @@
 {
   "Metadata": {
-    "title": "Tim Lee - Full Stack Developer",
-    "description": "Personal portfolio and blog of Tim Lee, a Full Stack Developer specializing in modern web technologies and AI tools."
+    "title": "Tim Lee — Web Developer & AI Enthusiast",
+    "description": "Personal portfolio and blog of Tim Lee, a Web Developer passionate about building modern web applications through conversations with AI Agents."
   },
   "HomePage": {
-    "title": "Hi, I'm Tim Lee",
-    "subtitle": "Full Stack Developer & AI Enthusiast",
-    "about": "Go to the about page",
-    "cta": "View My Work"
+    "title": "Hi, I’m Tim Lee",
+    "subtitle": "Web Developer & AI Enthusiast"
   },
   "Navigation": {
     "home": "Home",
@@ -26,7 +24,7 @@
   },
   "About": {
     "title": "About Me",
-    "description": "I'm a Full Stack Developer passionate about building modern web applications",
+    "description": "I’m a Web Developer passionate about building modern web applications through conversations with AI Agents",
     "skills": "My Skills"
   }
 }

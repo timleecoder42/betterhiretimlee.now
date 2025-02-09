@@ -1,11 +1,11 @@
 {
   "Metadata": {
-    "title": "Tim Lee - フルスタック開発者",
-    "description": "Tim Lee のポートフォリオとブログ。モダンなウェブ技術とAIツールを専門とするフルスタック開発者です。"
+    "title": "Tim Lee — Web開発者 & AIマニア",
+    "description": "Tim Leeのポートフォリオとブログ。AI Agentsとの対話を通じてモダンなウェブアプリケーションを構築することに情熱を注ぐWeb開発者です。"
   },
   "HomePage": {
     "title": "こんにちは、Tim Leeです",
-    "subtitle": "フルスタック開発者 & AI愛好家",
+    "subtitle": "Web開発者 & AIマニア",
     "about": "プロフィールへ",
     "cta": "作品を見る"
   },
@@ -26,7 +26,7 @@
   },
   "About": {
     "title": "プロフィール",
-    "description": "モダンなウェブアプリケーションの開発に情熱を注ぐフルスタック開発者です",
+    "description": "AI Agentsとの対話を通じてモダンなウェブアプリケーションを構築することに情熱を注ぐWeb開発者です",
     "skills": "スキル"
   }
 }
