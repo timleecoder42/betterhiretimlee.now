@@ -136,6 +136,7 @@ export function HeroSection() {
             <motion.div
               initial={{ rotate: 3 }}
               whileHover={{ scale: 1.02, rotate: 0 }}
+              whileTap={{ scale: 1.02, rotate: 0 }}
               animate={{ rotate: 3 }}
               transition={{
                 type: 'spring',
@@ -143,7 +144,7 @@ export function HeroSection() {
                 damping: 20,
                 mass: 1,
               }}
-              className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl ring-1 ring-black/5"
+              className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl ring-1 ring-black/5 cursor-pointer"
             >
               <Image
                 src="/timleecoder42.jpg"
