@@ -163,8 +163,8 @@ export function SkillsSection() {
                         whileHover={{ x: 2 }}
                         className="text-gray-600 dark:text-gray-300 flex items-start sm:items-center gap-3 group/item"
                       >
-                        <span className="mt-1.5 sm:mt-0 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500/80 to-blue-600/80 dark:from-blue-400/80 dark:to-blue-500/80 opacity-50 group-hover/item:opacity-100 transition-opacity" />
-                        <span className="text-sm sm:text-base group-hover/item:text-blue-500 dark:group-hover/item:text-blue-400 transition-colors">
+                        <span className="mt-1.5 sm:mt-0 w-1.5 h-1.5 shrink-0 rounded-full bg-gradient-to-r from-blue-500/80 to-blue-600/80 dark:from-blue-400/80 dark:to-blue-500/80 opacity-50 group-hover/item:opacity-100 transition-opacity" />
+                        <span className="text-base group-hover/item:text-blue-500 dark:group-hover/item:text-blue-400 transition-colors">
                           {skill}
                         </span>
                       </motion.li>
