@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const revalidate = 3600;
+export const revalidate = 3600; // 1 hour in seconds
 
 export async function generateStaticParams() {
   const allPosts = await Promise.all(

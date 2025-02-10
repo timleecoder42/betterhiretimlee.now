@@ -28,7 +28,7 @@ const getGitHubRepos = unstable_cache(
   },
   ['github-repos'],
   {
-    revalidate: 60, // 1 minute
+    revalidate: 60, // 1 minute in seconds
   }
 );
 
