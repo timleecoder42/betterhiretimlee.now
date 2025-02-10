@@ -1,17 +1,23 @@
 import { unstable_cache } from 'next/cache';
 import { NextResponse } from 'next/server';
 
-import { REVALIDATE_TIME } from '@/constants/config';
+import { REVALIDATE_TIME, GITHUB_USERNAME } from '@/constants/config';
 import type { Project, GitHubRepo } from '@/types/project';
 
 // Cache the fetch call to avoid unnecessary API calls
 const getGitHubRepos = unstable_cache(
   async () => {
-    const response = await fetch('https://api.github.com/users/timlee0119/repos?sort=updated', {
-      headers: {
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-      },
-    });
+    const response = await fetch(
+      `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100&type=public`,
+      {
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+          ...(process.env.GITHUB_TOKEN && {
+            Authorization: `token ${process.env.GITHUB_TOKEN}`,
+          }),
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error('Failed to fetch GitHub repos');
@@ -55,17 +61,22 @@ export async function GET() {
     const filteredRepos = repos.filter(repo => !repo.fork && !repo.archived);
 
     // Transform GitHub repos into projects
-    const projects: Project[] = filteredRepos.map(repo => ({
-      title: repo.name,
-      description: repo.description || '',
-      image: '', // Add image URL if available
-      tags: repo.topics || [],
-      demoUrl: repo.homepage || '',
-      githubUrl: repo.html_url,
-      stars: repo.stargazers_count,
-      updatedAt: repo.updated_at,
-      weight: calculateWeight(repo),
-    }));
+    const projects: Project[] = filteredRepos.map(repo => {
+      // Generate GitHub repository preview image URL
+      const imageUrl = `https://opengraph.githubassets.com/1/timlee0119/${repo.name}`;
+
+      return {
+        title: repo.name,
+        description: repo.description || '',
+        image: imageUrl,
+        tags: repo.topics || [],
+        demoUrl: repo.homepage || '',
+        githubUrl: repo.html_url,
+        stars: repo.stargazers_count,
+        updatedAt: repo.updated_at,
+        weight: calculateWeight(repo),
+      };
+    });
 
     // Sort projects by weight (descending)
     projects.sort((a, b) => b.weight - a.weight);

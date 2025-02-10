@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { BlogPost } from '@/components/blog/blog-post';
-import { REVALIDATE_TIME, SUPPORTED_LOCALES } from '@/constants/config';
+import { SUPPORTED_LOCALES } from '@/constants/config';
 import { getPostBySlug, getAllPosts } from '@/lib/blog';
 import { absoluteUrl } from '@/lib/utils';
 
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const revalidate = REVALIDATE_TIME;
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const allPosts = await Promise.all(

@@ -3,7 +3,7 @@ import type { Project } from '@/types/project';
 export async function getProjects(): Promise<Project[]> {
   try {
     // Get the base URL from environment variables, falling back to localhost for development
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
     const response = await fetch(`${baseUrl}/api/github`, {
       // Add cache: 'no-store' to prevent caching issues during development
       cache: 'no-store',

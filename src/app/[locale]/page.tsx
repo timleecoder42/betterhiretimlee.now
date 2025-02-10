@@ -1,8 +1,8 @@
 import { HeroSection } from '@/components/home/hero-section';
 import { ProjectsContainer } from '@/components/home/projects-container';
-import { REVALIDATE_TIME, SUPPORTED_LOCALES } from '@/constants/config';
+import { SUPPORTED_LOCALES } from '@/constants/config';
 
-export const revalidate = REVALIDATE_TIME;
+export const revalidate = 3600; // 1 hour in seconds
 
 export async function generateStaticParams() {
   return SUPPORTED_LOCALES.map(locale => ({ locale }));

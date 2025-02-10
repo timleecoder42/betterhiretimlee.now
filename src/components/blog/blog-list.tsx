@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 
 import { Link } from '@/i18n/routing';
-import type { BlogPost } from '@/lib/blog';
+import type { BlogPost } from '@/types/blog';
 
 const container = {
   hidden: { opacity: 0 },
