@@ -2,9 +2,9 @@
 
 import {
   CodeBracketIcon,
-  CommandLineIcon,
   CpuChipIcon,
   Cog6ToothIcon,
+  CubeTransparentIcon,
 } from '@heroicons/react/24/outline';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
@@ -22,21 +22,27 @@ const skills = [
     icon: <CpuChipIcon className="w-6 h-6" />,
     gradient: 'from-purple-500/40 to-indigo-600/40 dark:from-purple-400/90 dark:to-indigo-500/90',
     iconGradient: 'from-purple-500 to-indigo-600 dark:from-purple-400 dark:to-indigo-500',
-    items: ['Cursor', 'v0.dev', 'bolt.new', 'ChatGPT', 'GitHub Copilot'],
+    items: ['Cursor', 'Copilot/v0.dev/bolt.new', 'Devin', 'ChatGPT', 'DeepSeek'],
   },
   {
     category: 'skillCategories.web3',
-    icon: <CommandLineIcon className="w-6 h-6" />,
+    icon: <CubeTransparentIcon className="w-6 h-6" />,
     gradient: 'from-emerald-500/40 to-teal-600/40 dark:from-emerald-400/90 dark:to-teal-500/90',
     iconGradient: 'from-emerald-500 to-teal-600 dark:from-emerald-400 dark:to-teal-500',
-    items: ['Solidity', 'Hardhat', 'thirdweb', 'Ethers.js', 'OpenZeppelin'],
+    items: ['Smart Contract Basic', 'Wallets', 'Base', 'Solana', 'Learning...'],
   },
   {
     category: 'skillCategories.other',
     icon: <Cog6ToothIcon className="w-6 h-6" />,
     gradient: 'from-amber-500/40 to-orange-600/40 dark:from-amber-400/90 dark:to-orange-500/90',
     iconGradient: 'from-amber-500 to-orange-600 dark:from-amber-400 dark:to-orange-500',
-    items: ['Git', 'Linux', 'Raspberry Pi', 'CI/CD', 'Agile'],
+    items: [
+      'Git, Linux, Raspberry Pi',
+      'Slack, FigJam, Linear',
+      'Notion',
+      'Davinci Resolve',
+      'Filmmaking',
+    ],
   },
 ];
 
