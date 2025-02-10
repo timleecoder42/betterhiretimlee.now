@@ -43,10 +43,10 @@ export function BlogList({ posts }: { posts: BlogPost[] }) {
                   href={`/blog/${post.slug}`}
                   className="group flex items-baseline py-6 px-4 -mx-4 transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-800"
                 >
-                  <time className="w-32 shrink-0 text-lg text-gray-400 dark:text-gray-500 transition-colors duration-200 ease-in-out group-hover:text-gray-600 dark:group-hover:text-gray-300">
+                  <time className="w-32 shrink-0 text-lg text-gray-400 dark:text-gray-500">
                     {post.date}
                   </time>
-                  <h2 className="text-lg tracking-tight transition-colors duration-200 ease-in-out group-hover:text-primary">
+                  <h2 className="text-lg tracking-tight text-gray-900 dark:text-gray-100 group-hover:text-primary">
                     {post.title}
                   </h2>
                 </Link>
