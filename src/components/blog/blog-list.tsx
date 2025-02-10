@@ -39,11 +39,16 @@ export function BlogList({ posts }: { posts: BlogPost[] }) {
                 variants={item}
                 className="border-b border-gray-200 dark:border-gray-800 last:border-0"
               >
-                <Link href={`/blog/${post.slug}`} className="group flex items-baseline py-6">
-                  <time className="w-32 shrink-0 text-lg text-gray-400 dark:text-gray-500">
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="group flex items-baseline py-6 px-4 -mx-4 transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-800"
+                >
+                  <time className="w-32 shrink-0 text-lg text-gray-400 dark:text-gray-500 transition-colors duration-200 ease-in-out group-hover:text-gray-600 dark:group-hover:text-gray-300">
                     {post.date}
                   </time>
-                  <h2 className="text-lg tracking-tight group-hover:text-primary">{post.title}</h2>
+                  <h2 className="text-lg tracking-tight transition-colors duration-200 ease-in-out group-hover:text-primary">
+                    {post.title}
+                  </h2>
                 </Link>
               </motion.article>
             ))}
