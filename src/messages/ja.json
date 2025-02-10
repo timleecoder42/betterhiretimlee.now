@@ -75,6 +75,15 @@
     "newsletter": "一緒に繋がりましょう",
     "newsletterDescription": "参加する、コードとAIで一緒に創りましょう。",
     "newsletterPlaceholder": "メールアドレスを入力",
-    "subscribe": "参加する"
+    "subscribe": "参加する",
+    "loading": "登録中...",
+    "success": "登録完了！",
+    "errors": {
+      "INVALID_EMAIL": "有効なメールアドレスを入力してください",
+      "ALREADY_SUBSCRIBED": "すでに登録されています！",
+      "RATE_LIMITED": "試行回数が多すぎます。しばらくしてからお試しください。",
+      "SERVER_ERROR": "登録に失敗しました。後でもう一度お試しください。",
+      "UNKNOWN_ERROR": "エラーが発生しました。もう一度お試しください。"
+    }
   }
 }

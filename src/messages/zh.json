@@ -75,6 +75,15 @@
     "newsletter": "让我们保持联系",
     "newsletterDescription": "加入订阅一起用代码和 AI 创造美好事物。",
     "newsletterPlaceholder": "输入您的邮箱",
-    "subscribe": "加入"
+    "subscribe": "加入",
+    "loading": "订阅中...",
+    "success": "订阅成功！",
+    "errors": {
+      "INVALID_EMAIL": "请输入有效的邮箱地址",
+      "ALREADY_SUBSCRIBED": "您已经订阅过了！",
+      "RATE_LIMITED": "尝试次数过多，请稍后再试。",
+      "SERVER_ERROR": "订阅失败，请稍后重试。",
+      "UNKNOWN_ERROR": "出现错误，请重试。"
+    }
   }
 }

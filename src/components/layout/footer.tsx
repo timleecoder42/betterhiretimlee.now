@@ -1,10 +1,17 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { MailIcon } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MailIcon, Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
+import { useState } from 'react';
 
 import { CONTACT_EMAIL, GITHUB_USERNAME } from '@/constants/config';
+import {
+  newsletterSchema,
+  type NewsletterErrorCode,
+  NEWSLETTER_ERROR_CODES,
+} from '@/lib/validations/newsletter';
 
 function GitHubIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -39,7 +46,56 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export function Footer() {
   const t = useTranslations('Footer');
+  const locale = useLocale();
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
+
+  const resetForm = () => {
+    setStatus('idle');
+    setMessage('');
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    try {
+      // Client-side validation
+      const result = newsletterSchema.safeParse({ email, locale });
+      if (!result.success) {
+        const errorCode = result.error.errors[0]?.message as NewsletterErrorCode;
+        setStatus('error');
+        setMessage(t(`errors.${errorCode}`));
+        setTimeout(resetForm, 5000);
+        return;
+      }
+
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, locale }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus('success');
+        setEmail('');
+        setMessage(''); // Clear any existing error message
+      } else {
+        setStatus('error');
+        setMessage(t(`errors.${data.code}`));
+      }
+    } catch {
+      setStatus('error');
+      setMessage(t(`errors.${NEWSLETTER_ERROR_CODES.UNKNOWN_ERROR}`));
+    }
+
+    // Reset status and message after 5 seconds
+    setTimeout(resetForm, 5000);
+  };
 
   return (
     <footer className="relative min-h-screen flex flex-col">
@@ -64,12 +120,12 @@ export function Footer() {
       <div className="relative flex-1 flex flex-col max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8 w-full">
         {/* Main content section */}
         <div className="flex-1 flex flex-col items-center justify-center">
-          <div className="w-full max-w-4xl mx-auto text-center space-y-32">
+          <div className="w-full max-w-4xl mx-auto text-center space-y-16 sm:space-y-32">
             {/* Newsletter section */}
             <motion.div
               initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
+              viewport={{ once: true, margin: '-20px' }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
               className="space-y-10"
             >
@@ -77,7 +133,7 @@ export function Footer() {
                 <motion.h2
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
+                  viewport={{ once: true, margin: '-20px' }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400 uppercase animate-gradient"
                 >
@@ -86,7 +142,7 @@ export function Footer() {
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
+                  viewport={{ once: true, margin: '-20px' }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
                 >
@@ -96,41 +152,97 @@ export function Footer() {
               <motion.form
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
+                viewport={{ once: true, margin: '-20px' }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                onSubmit={e => {
-                  e.preventDefault();
-                  // TODO: Implement newsletter subscription
-                }}
+                onSubmit={handleSubmit}
                 className="w-full max-w-lg mx-auto"
               >
-                <div className="flex flex-col sm:flex-row items-center gap-3">
+                <div className="flex flex-col sm:flex-row items-start gap-4">
                   <div className="relative w-full">
                     <input
                       type="email"
                       placeholder={t('newsletterPlaceholder')}
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleSubmit(e);
+                        }
+                      }}
                       className="w-full px-5 py-3 rounded-full bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 shadow-sm"
                       required
+                      disabled={status === 'loading' || status === 'success'}
                     />
+                    <div className="h-4 relative">
+                      <AnimatePresence>
+                        {message && status === 'error' && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute top-1 inset-x-0 text-sm text-center text-red-600 dark:text-red-400"
+                          >
+                            <p className="px-2 break-words">{message}</p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </div>
                   <motion.button
-                    whileHover={{
-                      scale: 1.03,
-                      boxShadow: '0 0 20px rgba(79, 70, 229, 0.4)',
-                    }}
-                    whileTap={{
-                      scale: 0.95,
-                      boxShadow: '0 0 10px rgba(79, 70, 229, 0.2)',
-                    }}
+                    whileHover={
+                      status === 'idle'
+                        ? {
+                            scale: 1.03,
+                            boxShadow: '0 0 20px rgba(79, 70, 229, 0.4)',
+                          }
+                        : undefined
+                    }
+                    whileTap={
+                      status === 'idle'
+                        ? {
+                            scale: 0.95,
+                            boxShadow: '0 0 10px rgba(79, 70, 229, 0.2)',
+                          }
+                        : undefined
+                    }
                     transition={{
                       type: 'spring',
                       stiffness: 400,
                       damping: 10,
                     }}
-                    className="relative w-full sm:w-auto px-8 py-3 text-white rounded-full shadow-sm font-medium overflow-hidden group whitespace-nowrap flex items-center justify-center"
+                    disabled={status === 'loading' || status === 'success'}
+                    className="w-full sm:w-[220px] relative px-4 py-3 text-white rounded-full shadow-sm font-medium overflow-hidden group whitespace-nowrap flex items-center justify-center disabled:opacity-75 disabled:cursor-not-allowed"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400 animate-gradient" />
-                    <span className="relative inline-flex items-center">{t('subscribe')}</span>
+                    <span className="relative inline-flex items-center gap-2">
+                      {status === 'loading' ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          {t('loading')}
+                        </>
+                      ) : status === 'success' ? (
+                        <>
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          {t('success')}
+                        </>
+                      ) : (
+                        t('subscribe')
+                      )}
+                    </span>
                   </motion.button>
                 </div>
               </motion.form>
@@ -140,7 +252,7 @@ export function Footer() {
             <motion.div
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
+              viewport={{ once: true, margin: '-20px' }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex justify-center"
             >
@@ -218,9 +330,9 @@ export function Footer() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16"
+          viewport={{ once: true, margin: '-10px' }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-0 sm:mt-16"
         >
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
             <div className="flex items-center gap-2">

@@ -11,6 +11,7 @@ A modern, internationalized portfolio website built with Next.js 15 and React 19
 - 🧩 Modern UI components using Headless UI
 - ⚡ Fast development with Turbopack
 - 🖼️ Dynamic OG images for social sharing
+- 📧 Integrated with [Buttondown](https://buttondown.email/) for newsletter management
 
 ## Getting Started
 
@@ -43,6 +44,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [Heroicons](https://heroicons.com/) - Beautiful hand-crafted SVG icons
 - [Lucide Icons](https://lucide.dev/) - Beautiful & consistent icons
 - [@vercel/og](https://vercel.com/docs/functions/edge-functions/og-image-generation) - Dynamic OG image generation
+- [Buttondown](https://buttondown.email/) - Newsletter service
 
 ## Social Sharing
 
@@ -72,6 +74,9 @@ To enable GitHub integration for the projects section:
 # In production, this should be your deployed URL (e.g., https://example.com)
 # For local development, use http://localhost:3000
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# Required: Buttondown API key for newsletter subscription
+BUTTONDOWN_API_KEY=your_api_key
 
 # Optional: GitHub personal access token (Classic)
 # Increases API rate limit from 60 to 5000 requests per hour

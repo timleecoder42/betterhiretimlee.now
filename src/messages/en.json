@@ -73,6 +73,15 @@
     "newsletter": "Let's stay in touch",
     "newsletterDescription": "Join me on this journey of building beautiful things with code and AI.",
     "newsletterPlaceholder": "Enter your email",
-    "subscribe": "Join"
+    "subscribe": "Join",
+    "loading": "Subscribing...",
+    "success": "Subscribed!",
+    "errors": {
+      "INVALID_EMAIL": "Please enter a valid email address",
+      "ALREADY_SUBSCRIBED": "You're already subscribed!",
+      "RATE_LIMITED": "Too many subscription attempts. Please try again later.",
+      "SERVER_ERROR": "Failed to subscribe. Please try again later.",
+      "UNKNOWN_ERROR": "Something went wrong. Please try again."
+    }
   }
 }
