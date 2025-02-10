@@ -138,33 +138,33 @@ export function SkillsSection() {
                 transition={{ type: 'spring', stiffness: 300, damping: 20, delay: index * 0.1 }}
                 className="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-100/80 dark:border-gray-700/50 h-full overflow-hidden"
               >
-                <div className="relative p-6 sm:p-8">
+                <div className="relative p-4 sm:p-8">
                   <div className="flex items-center gap-4 mb-6">
                     <span
-                      className={`flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${skillGroup.iconGradient} text-white`}
+                      className={`flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${skillGroup.iconGradient} text-white`}
                     >
                       <motion.div
                         initial={{ rotate: 0 }}
                         whileHover={{ rotate: 90 }}
                         transition={{ duration: 0.2 }}
-                        className="w-6 h-6"
+                        className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center"
                       >
                         {skillGroup.icon}
                       </motion.div>
                     </span>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                    <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-200">
                       {t(skillGroup.category)}
                     </h3>
                   </div>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     {skillGroup.items.map((skill, skillIndex) => (
                       <motion.li
                         key={skillIndex}
                         whileHover={{ x: 2 }}
-                        className="text-gray-600 dark:text-gray-300 flex items-center gap-3 group/item"
+                        className="text-gray-600 dark:text-gray-300 flex items-start sm:items-center gap-3 group/item"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500/80 to-blue-600/80 dark:from-blue-400/80 dark:to-blue-500/80 opacity-50 group-hover/item:opacity-100 transition-opacity" />
-                        <span className="text-base group-hover/item:text-blue-500 dark:group-hover/item:text-blue-400 transition-colors">
+                        <span className="mt-1.5 sm:mt-0 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500/80 to-blue-600/80 dark:from-blue-400/80 dark:to-blue-500/80 opacity-50 group-hover/item:opacity-100 transition-opacity" />
+                        <span className="text-sm sm:text-base group-hover/item:text-blue-500 dark:group-hover/item:text-blue-400 transition-colors">
                           {skill}
                         </span>
                       </motion.li>

@@ -63,10 +63,10 @@ function ExperienceCard({
         className={`absolute inset-0 ${gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300`}
       />
       <div className="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-100/80 dark:border-gray-700/50 overflow-hidden">
-        <div className="relative p-6 sm:p-8">
-          <div className="flex items-center gap-4 mb-6">
+        <div className="relative p-4 sm:p-6 md:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
             <span
-              className={`flex items-center justify-center w-12 h-12 rounded-xl ${
+              className={`flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${
                 company?.logo
                   ? 'bg-white dark:bg-gray-700'
                   : iconGradient || gradient.replace('10', '90')
@@ -77,7 +77,7 @@ function ExperienceCard({
                   initial={{ rotate: 0 }}
                   whileHover={{ rotate: 90 }}
                   transition={{ duration: 0.2 }}
-                  className="relative w-8 h-8"
+                  className="relative w-6 h-6 sm:w-8 sm:h-8"
                 >
                   <Image src={company.logo} alt={company.name} fill className="object-contain" />
                 </motion.div>
@@ -86,7 +86,7 @@ function ExperienceCard({
                   initial={{ rotate: 0 }}
                   whileHover={{ rotate: 90 }}
                   transition={{ duration: 0.2 }}
-                  className="w-6 h-6"
+                  className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center"
                 >
                   {icon}
                 </motion.div>
@@ -136,19 +136,19 @@ function ExperienceCard({
               </div>
             </div>
           </div>
-          <div className="pl-16">
-            <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+          <div className="pl-0 sm:pl-16">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               {description}
             </p>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-4 space-y-2 sm:space-y-3">
               {details.map((detail, index) => (
                 <motion.li
                   key={index}
                   whileHover={{ x: 2 }}
-                  className="text-gray-600 dark:text-gray-300 flex items-center gap-3 group/item"
+                  className="text-gray-600 dark:text-gray-300 flex items-start sm:items-center gap-3 group/item"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500/80 to-blue-600/80 dark:from-blue-400/80 dark:to-blue-500/80 opacity-50 group-hover/item:opacity-100 transition-opacity" />
-                  <span className="text-base group-hover/item:text-blue-500 dark:group-hover/item:text-blue-400 transition-colors">
+                  <span className="mt-1.5 sm:mt-0 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-gradient-to-r from-blue-500/80 to-blue-600/80 dark:from-blue-400/80 dark:to-blue-500/80 opacity-50 group-hover/item:opacity-100 transition-opacity" />
+                  <span className="text-sm sm:text-base group-hover/item:text-blue-500 dark:group-hover/item:text-blue-400 transition-colors">
                     {detail}
                   </span>
                 </motion.li>
