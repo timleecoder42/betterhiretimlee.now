@@ -1,14 +1,4 @@
-export type Project = {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  demoUrl: string;
-  githubUrl: string;
-  stars: number;
-  updatedAt: string;
-  weight: number;
-};
+import type { Project } from '@/types/project';
 
 export async function getProjects(): Promise<Project[]> {
   try {

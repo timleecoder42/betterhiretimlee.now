@@ -5,15 +5,7 @@ import { format } from 'date-fns';
 import matter from 'gray-matter';
 
 import { POSTS_PATH } from '@/constants/server';
-
-export type BlogPost = {
-  slug: string;
-  title: string;
-  date: string;
-  content: string;
-  excerpt?: string;
-  locale: string;
-};
+import type { BlogPost } from '@/types/blog';
 
 function formatDate(date: Date) {
   return format(date, 'yyyy-MM-dd');

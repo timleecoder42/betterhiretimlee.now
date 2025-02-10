@@ -1,21 +1,12 @@
-import { ExperienceSection } from '@/components/about/experience-section';
-import { HeroSection } from '@/components/about/hero-section';
-import { SkillsSection } from '@/components/about/skills-section';
+import { AboutContent } from '@/components/about/about-content';
+import { REVALIDATE_TIME, SUPPORTED_LOCALES } from '@/constants/config';
 
-export default function About() {
-  return (
-    <div className="min-h-screen w-full pb-48">
-      {/* Hero Section */}
-      <HeroSection />
+export const revalidate = REVALIDATE_TIME;
 
-      {/* Other sections with original width */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Skills Section */}
-        <SkillsSection />
+export async function generateStaticParams() {
+  return SUPPORTED_LOCALES.map(locale => ({ locale }));
+}
 
-        {/* Experience Section */}
-        <ExperienceSection />
-      </div>
-    </div>
-  );
+export default function AboutPage() {
+  return <AboutContent />;
 }

@@ -7,8 +7,8 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import { Navigation } from '@/components/layout/navigation';
 import { Providers } from '@/components/providers';
 import { BackgroundPattern } from '@/components/ui/background-gradient';
-import type { Locale } from '@/i18n/types';
-import { isValidLocale } from '@/i18n/types';
+import { isValidLocale } from '@/i18n/utils';
+import type { Locale } from '@/types/common';
 
 import '@/styles/globals.css';
 

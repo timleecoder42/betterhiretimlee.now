@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import { AnimatedText } from '@/components/ui/animated-text';
-import { CONTACT_EMAIL } from '@/constants/contact';
+import { CONTACT_EMAIL } from '@/constants/config';
 
 export function HeroSection() {
   const t = useTranslations('About');

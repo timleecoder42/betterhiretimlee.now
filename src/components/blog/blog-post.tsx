@@ -2,8 +2,7 @@ import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
 import { BlogPostHeader } from '@/components/blog/blog-post-header';
-import type { BlogPost } from '@/lib/blog';
-
+import type { BlogPost } from '@/types/blog';
 
 type MDXComponentProps = {
   children?: React.ReactNode;
