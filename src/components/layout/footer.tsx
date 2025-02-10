@@ -156,6 +156,7 @@ export function Footer() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 onSubmit={handleSubmit}
                 className="w-full max-w-lg mx-auto"
+                noValidate
               >
                 <div className="flex flex-col sm:flex-row items-start gap-4">
                   <div className="relative w-full">
