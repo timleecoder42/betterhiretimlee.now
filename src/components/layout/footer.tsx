@@ -144,7 +144,7 @@ export function Footer() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-20px' }}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+                  className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
                 >
                   {t('newsletterDescription')}
                 </motion.p>
