@@ -216,16 +216,28 @@ export function Footer() {
                     className="w-full sm:w-[220px] relative px-4 py-3 text-white rounded-full shadow-sm font-medium overflow-hidden group whitespace-nowrap flex items-center justify-center disabled:opacity-75 disabled:cursor-not-allowed"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400 animate-gradient" />
-                    <span className="relative inline-flex items-center gap-2">
+                    <AnimatePresence mode="wait">
                       {status === 'loading' ? (
-                        <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
+                        <motion.span
+                          key="loading"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="relative inline-flex items-center gap-2"
+                        >
+                          <Loader2 className="w-5 h-5 animate-spin" />
                           {t('loading')}
-                        </>
+                        </motion.span>
                       ) : status === 'success' ? (
-                        <>
+                        <motion.span
+                          key="success"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="relative inline-flex items-center gap-2"
+                        >
                           <svg
-                            className="w-4 h-4"
+                            className="w-5 h-5"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -238,11 +250,19 @@ export function Footer() {
                             />
                           </svg>
                           {t('success')}
-                        </>
+                        </motion.span>
                       ) : (
-                        t('subscribe')
+                        <motion.span
+                          key="subscribe"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="relative"
+                        >
+                          {t('subscribe')}
+                        </motion.span>
                       )}
-                    </span>
+                    </AnimatePresence>
                   </motion.button>
                 </div>
               </motion.form>
