@@ -1,4 +1,4 @@
-import { ExperienceSection } from '@/components/about/experience-section';
+import { ExperiencesSection } from '@/components/about/experiences-section';
 import { HeroSection } from '@/components/about/hero-section';
 import { SkillsSection } from '@/components/about/skills-section';
 
@@ -13,8 +13,8 @@ export function AboutContent() {
         {/* Skills Section */}
         <SkillsSection />
 
-        {/* Experience Section */}
-        <ExperienceSection />
+        {/* Experiences Section */}
+        <ExperiencesSection />
       </div>
     </div>
   );

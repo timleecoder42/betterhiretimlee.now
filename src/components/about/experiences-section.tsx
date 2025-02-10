@@ -5,31 +5,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 260,
-      damping: 20,
-      duration: 0.6,
-    },
-  },
-};
-
 interface ExperienceCardProps {
   icon: React.ReactNode;
   title: string;
@@ -58,7 +33,17 @@ function ExperienceCard({
   projectLink,
 }: ExperienceCardProps) {
   return (
-    <motion.div variants={item} whileHover={{ y: -2 }} className="relative group">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      whileHover={{ y: -2 }}
+      transition={{
+        duration: 0.5,
+        ease: [0.33, 1, 0.68, 1],
+      }}
+      className="relative group"
+    >
       <div
         className={`absolute inset-0 ${gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300`}
       />
@@ -161,7 +146,7 @@ function ExperienceCard({
   );
 }
 
-export function ExperienceSection() {
+export function ExperiencesSection() {
   const t = useTranslations('About');
   const { scrollYProgress } = useScroll();
 
@@ -257,7 +242,7 @@ export function ExperienceSection() {
               className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
             >
               <span className="block bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 dark:from-white dark:via-gray-200 dark:to-gray-400">
-                {t('experience')}
+                {t('experiences')}
               </span>
             </motion.h2>
           </motion.div>
@@ -271,7 +256,7 @@ export function ExperienceSection() {
               style={{ y: useTransform(scrollYProgress, [0, 1], [0, -25]) }}
               className="text-xl text-gray-600 dark:text-gray-300"
             >
-              {t('experienceDescription')}
+              {t('experiencesDescription')}
             </motion.p>
           </motion.div>
         </div>
@@ -283,17 +268,11 @@ export function ExperienceSection() {
           transition={{ duration: 0.6 }}
           className="relative w-full"
         >
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 gap-6 sm:gap-8"
-          >
+          <div className="grid grid-cols-1 gap-6 sm:gap-8">
             {experiences.map((experience, index) => (
               <ExperienceCard key={index} {...experience} />
             ))}
-          </motion.div>
+          </div>
         </motion.div>
       </motion.div>
     </section>
