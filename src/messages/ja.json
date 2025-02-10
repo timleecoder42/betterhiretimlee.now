@@ -66,5 +66,15 @@
     "title": "最新のブログ記事",
     "description": "技術、デザイン、そして人生についての思考、アイデア、ストーリー。",
     "footer": "この記事はCursor AIと共に創作しました"
+  },
+  "Footer": {
+    "rights": "すべての権利を保有します。",
+    "sourceCode": "ソースコード",
+    "madeWith": "制作：",
+    "and": "と",
+    "newsletter": "一緒に繋がりましょう",
+    "newsletterDescription": "参加する、コードとAIで一緒に創りましょう。",
+    "newsletterPlaceholder": "メールアドレスを入力",
+    "subscribe": "参加する"
   }
 }

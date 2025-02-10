@@ -4,9 +4,10 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 
+import { Footer } from '@/components/layout/footer';
 import { Navigation } from '@/components/layout/navigation';
 import { Providers } from '@/components/providers';
-import { BackgroundPattern } from '@/components/ui/background-gradient';
+import { BackgroundGradient } from '@/components/ui/background-gradient';
 import { isValidLocale } from '@/i18n/utils';
 import type { Locale } from '@/types/common';
 
@@ -71,7 +72,8 @@ export default async function LocaleLayout({ children, params }: Props) {
           <NextIntlClientProvider messages={messages}>
             <Navigation />
             <main className="min-h-screen">{children}</main>
-            <BackgroundPattern />
+            <Footer />
+            <BackgroundGradient />
           </NextIntlClientProvider>
         </Providers>
       </body>

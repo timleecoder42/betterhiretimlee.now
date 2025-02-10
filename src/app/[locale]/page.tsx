@@ -10,7 +10,7 @@ export async function generateStaticParams() {
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full pb-48">
+    <div className="min-h-screen w-full">
       <HeroSection />
       <ProjectsContainer />
     </div>

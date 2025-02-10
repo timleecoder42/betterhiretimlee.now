@@ -64,5 +64,15 @@
     "title": "Latest Blog Posts",
     "description": "Thoughts, ideas, and stories about technology, design, and life.",
     "footer": "This blog post was co-created with Cursor AI"
+  },
+  "Footer": {
+    "rights": "All rights reserved.",
+    "sourceCode": "Source Code",
+    "madeWith": "Made with",
+    "and": "and",
+    "newsletter": "Let's stay in touch",
+    "newsletterDescription": "Join me on this journey of building beautiful things with code and AI.",
+    "newsletterPlaceholder": "Enter your email",
+    "subscribe": "Join"
   }
 }

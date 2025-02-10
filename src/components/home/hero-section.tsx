@@ -60,7 +60,7 @@ export function HeroSection() {
                       staggerFrom={'first'}
                       reverse={false}
                       inViewOnce={true}
-                      inViewDelay={0.5}
+                      inViewDelay={1}
                       inViewDirection="down"
                     />
                   </span>

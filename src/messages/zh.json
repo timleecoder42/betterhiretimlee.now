@@ -66,5 +66,15 @@
     "title": "最新博客文章",
     "description": "关于技术、设计和生活的思考、想法和故事。",
     "footer": "本博文与 Cursor AI 共同创作"
+  },
+  "Footer": {
+    "rights": "版权所有。",
+    "sourceCode": "源代码",
+    "madeWith": "由",
+    "and": "和",
+    "newsletter": "让我们保持联系",
+    "newsletterDescription": "加入订阅一起用代码和 AI 创造美好事物。",
+    "newsletterPlaceholder": "输入您的邮箱",
+    "subscribe": "加入"
   }
 }

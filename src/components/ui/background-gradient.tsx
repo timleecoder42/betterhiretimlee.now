@@ -1,6 +1,6 @@
 'use client';
 
-export function BackgroundPattern() {
+export function BackgroundGradient() {
   return (
     <>
       <div className="fixed inset-0 w-full h-full -z-10 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 dark:from-blue-500/30 dark:via-purple-500/30 dark:to-pink-500/30" />

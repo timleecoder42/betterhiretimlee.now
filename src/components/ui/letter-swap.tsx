@@ -1,9 +1,11 @@
 'use client';
 
-import type { AnimationOptions} from 'framer-motion';
+import type { AnimationOptions } from 'framer-motion';
 import { motion, stagger, useAnimate } from 'framer-motion';
 import { debounce } from 'lodash';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import { useMounted } from '@/hooks/useMounted';
 
 interface TextProps {
   label: string;
@@ -145,6 +147,7 @@ export const LetterSwapPingPongInView = ({
   const [isHovered, setIsHovered] = useState(false);
   const [hasInitialAnimationCompleted, setHasInitialAnimationCompleted] = useState(false);
   const [isInitialAnimating, setIsInitialAnimating] = useState(false);
+  const isMounted = useMounted();
 
   const mergeTransition = (baseTransition: AnimationOptions) => ({
     ...baseTransition,
@@ -153,13 +156,28 @@ export const LetterSwapPingPongInView = ({
     }),
   });
 
+  const safeAnimate = async (...args: Parameters<typeof animate>) => {
+    if (isMounted && scope.current) {
+      return animate(...args);
+    }
+    return Promise.resolve();
+  };
+
+  useEffect(() => {
+    return () => {
+      // Cleanup debounced functions on unmount
+      startAnimation.cancel();
+      endAnimation.cancel();
+    };
+  }, []);
+
   const startAnimation = debounce(
     () => {
-      if (isHovered || isInitialAnimating) return;
+      if (isHovered || isInitialAnimating || !isMounted) return;
       setIsHovered(true);
 
-      animate('.letter', { y: reverse ? '100%' : '-100%' }, mergeTransition(transition));
-      animate(
+      safeAnimate('.letter', { y: reverse ? '100%' : '-100%' }, mergeTransition(transition));
+      safeAnimate(
         '.letter-secondary',
         {
           top: '0%',
@@ -173,10 +191,10 @@ export const LetterSwapPingPongInView = ({
 
   const endAnimation = debounce(
     () => {
-      if (isInitialAnimating) return;
+      if (isInitialAnimating || !isMounted) return;
       setIsHovered(false);
 
-      animate(
+      safeAnimate(
         '.letter',
         {
           y: 0,
@@ -184,7 +202,7 @@ export const LetterSwapPingPongInView = ({
         mergeTransition(transition)
       );
 
-      animate(
+      safeAnimate(
         '.letter-secondary',
         {
           top: reverse ? '-100%' : '100%',
@@ -197,31 +215,38 @@ export const LetterSwapPingPongInView = ({
   );
 
   const triggerAnimation = () => {
-    if (hasInitialAnimationCompleted || isInitialAnimating) return;
+    if (hasInitialAnimationCompleted || isInitialAnimating || !isMounted) return;
     setIsInitialAnimating(true);
 
-    setTimeout(() => {
-      animate(
+    const timeoutId = setTimeout(() => {
+      if (!isMounted) return;
+
+      safeAnimate(
         '.letter',
         { y: inViewDirection === 'up' ? '-100%' : '100%' },
         mergeTransition(transition)
       );
-      animate(
+      safeAnimate(
         '.letter-secondary',
         {
           top: '0%',
         },
         mergeTransition(transition)
       ).then(() => {
-        animate('.letter', { y: 0 }, { duration: 0 });
-        animate('.letter-secondary', { top: reverse ? '-100%' : '100%' }, { duration: 0 }).then(
+        if (!isMounted) return;
+
+        safeAnimate('.letter', { y: 0 }, { duration: 0 });
+        safeAnimate('.letter-secondary', { top: reverse ? '-100%' : '100%' }, { duration: 0 }).then(
           () => {
+            if (!isMounted) return;
             setHasInitialAnimationCompleted(true);
             setIsInitialAnimating(false);
           }
         );
       });
     }, inViewDelay * 1000);
+
+    return () => clearTimeout(timeoutId);
   };
 
   return (
