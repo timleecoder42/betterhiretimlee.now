@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
     "prepare": "husky install",
     "format": "prettier --write ."
   },
@@ -48,7 +49,7 @@
       "prettier --write",
       "eslint --fix"
     ],
-    "*.{json,css,md}": [
+    "*.{json,md}": [
       "prettier --write"
     ]
   }

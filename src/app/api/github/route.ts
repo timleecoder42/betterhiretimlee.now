@@ -1,7 +1,7 @@
 import { unstable_cache } from 'next/cache';
 import { NextResponse } from 'next/server';
 
-import { REVALIDATE_TIME, GITHUB_USERNAME } from '@/constants/config';
+import { GITHUB_USERNAME } from '@/constants/config';
 import type { Project, GitHubRepo } from '@/types/project';
 
 // Cache the fetch call to avoid unnecessary API calls
@@ -28,7 +28,7 @@ const getGitHubRepos = unstable_cache(
   },
   ['github-repos'],
   {
-    revalidate: REVALIDATE_TIME,
+    revalidate: 60, // 1 minute
   }
 );
 

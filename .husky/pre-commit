@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# Run type checking first
+pnpm type-check || exit 1
+
+# Run lint-staged for other checks
 pnpm lint-staged
