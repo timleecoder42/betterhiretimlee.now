@@ -41,11 +41,25 @@
     "experience": "经历",
     "experienceDescription": "我在 Web 开发和 AI 领域的历程",
     "currentRole": "Web 开发者 & AI 狂热者",
-    "currentRoleDescription": "目前专注于通过与 AI Agents 对话构建现代 Web 应用，探索创新的开发方式。",
+    "currentRoleDescription": "目前专注于通过与 AI Agents 对话构建现代 Web 应用，探索创新的开发方式，以及自己在未来 AGI 时代的新身份。",
+    "previousRole": "人生探索与实习",
+    "previousRoleDescription": "进行了一段人生探索，摄影、旅行和视频创作，后期在 MugglePay 担任 Web3 营销实习生，负责创意视频内容制作。",
+    "earlyRole": "前端开发工程师",
+    "earlyRoleDescription": "参与 Nexus 的前端开发，负责用户界面实现和交互设计，与设计师、产品经理、后端工程师紧密合作，确保用户体验和开发体验。",
     "experienceDetails": {
       "buildingApps": "使用 Next.js 和 TypeScript 构建现代 Web 应用",
       "leveragingAI": "利用 AI 工具提升开发效率",
-      "exploring": "探索创新的软件开发方法"
+      "exploring": "探索创新的软件开发方法",
+      "previousRole": {
+        "detail1": "探索摄影和视频创作",
+        "detail2": "学习剪辑软件和视频后期制作",
+        "detail3": "学习 Crypto 最新知识，使用 AI 工具创作 Web3 营销视频内容"
+      },
+      "earlyRole": {
+        "detail1": "使用 Next.js, Tailwind CSS, Radix UI, Framer Motion, React Query 开发极致用户界面",
+        "detail2": "实现前端组件库和样式系统",
+        "detail3": "优化前端构建流程和开发体验"
+      }
     }
   },
   "Blog": {

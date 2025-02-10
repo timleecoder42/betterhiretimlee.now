@@ -13,28 +13,28 @@ const skills = [
   {
     category: 'skillCategories.frontend',
     icon: <CodeBracketIcon className="w-6 h-6" />,
-    gradient: 'from-pink-500/40 to-rose-600/40 dark:from-pink-400/90 dark:to-rose-500/90',
+    gradient: 'from-pink-500/10 to-rose-600/10 dark:from-pink-400/10 dark:to-rose-500/10',
     iconGradient: 'from-pink-500 to-rose-600 dark:from-pink-400 dark:to-rose-500',
     items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
   },
   {
     category: 'skillCategories.aiTools',
     icon: <CpuChipIcon className="w-6 h-6" />,
-    gradient: 'from-purple-500/40 to-indigo-600/40 dark:from-purple-400/90 dark:to-indigo-500/90',
+    gradient: 'from-purple-500/10 to-indigo-600/10 dark:from-purple-400/10 dark:to-indigo-500/10',
     iconGradient: 'from-purple-500 to-indigo-600 dark:from-purple-400 dark:to-indigo-500',
     items: ['Cursor', 'Copilot/v0.dev/bolt.new', 'Devin', 'ChatGPT', 'DeepSeek'],
   },
   {
     category: 'skillCategories.web3',
     icon: <CubeTransparentIcon className="w-6 h-6" />,
-    gradient: 'from-emerald-500/40 to-teal-600/40 dark:from-emerald-400/90 dark:to-teal-500/90',
+    gradient: 'from-emerald-500/10 to-teal-600/10 dark:from-emerald-400/10 dark:to-teal-500/10',
     iconGradient: 'from-emerald-500 to-teal-600 dark:from-emerald-400 dark:to-teal-500',
     items: ['Smart Contract Basic', 'Wallets', 'Base', 'Solana', 'Learning...'],
   },
   {
     category: 'skillCategories.other',
     icon: <Cog6ToothIcon className="w-6 h-6" />,
-    gradient: 'from-amber-500/40 to-orange-600/40 dark:from-amber-400/90 dark:to-orange-500/90',
+    gradient: 'from-amber-500/10 to-orange-600/10 dark:from-amber-400/10 dark:to-orange-500/10',
     iconGradient: 'from-amber-500 to-orange-600 dark:from-amber-400 dark:to-orange-500',
     items: [
       'Git, Linux, Raspberry Pi',

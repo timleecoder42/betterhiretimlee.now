@@ -40,10 +40,24 @@
     "experienceDescription": "My journey in web development and AI",
     "currentRole": "Web Developer & AI Enthusiast",
     "currentRoleDescription": "Currently focused on building modern web applications through conversations with AI Agents, exploring new ways to enhance development workflows.",
+    "previousRole": "Life Exploration & Internship",
+    "previousRoleDescription": "Took time to explore life through photography, travel, and video creation, followed by a Web3 marketing internship at MugglePay, creating creative video content.",
+    "earlyRole": "Frontend Developer",
+    "earlyRoleDescription": "Contributed to frontend development of Nexus, responsible for UI implementation and interaction design, working closely with designers, product managers, and backend engineers.",
     "experienceDetails": {
       "buildingApps": "Building modern web applications with Next.js and TypeScript",
       "leveragingAI": "Leveraging AI tools to enhance development workflow",
-      "exploring": "Exploring innovative approaches to software development"
+      "exploring": "Exploring innovative approaches to software development",
+      "previousRole": {
+        "detail1": "Exploring photography and video creation",
+        "detail2": "Learning video editing software and post-production",
+        "detail3": "Learning latest Crypto knowledge, creating Web3 marketing videos using AI tools"
+      },
+      "earlyRole": {
+        "detail1": "Developing polished user interfaces using Next.js, Tailwind CSS, Radix UI, Framer Motion, and React Query",
+        "detail2": "Implementing frontend component library and styling system",
+        "detail3": "Optimizing frontend build process and development experience"
+      }
     }
   },
   "Blog": {

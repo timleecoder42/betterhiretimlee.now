@@ -42,10 +42,24 @@
     "experienceDescription": "Web開発とAIの分野での私の歩み",
     "currentRole": "Web開発者 & AIマニア",
     "currentRoleDescription": "AI Agentsとの対話を通じてモダンなWeb開発を行い、新しい開発手法を探求しています。",
+    "previousRole": "人生の探求とインターンシップ",
+    "previousRoleDescription": "写真撮影、旅行、動画制作を通じて人生を探求し、その後MugglePayでWeb3マーケティングインターンとしてクリエイティブな動画コンテンツの制作に携わりました。",
+    "earlyRole": "フロントエンド開発者",
+    "earlyRoleDescription": "Nexusのフロントエンド開発に参加し、UIの実装とインタラクション設計を担当。デザイナー、プロダクトマネージャー、バックエンドエンジニアと密接に協力しました。",
     "experienceDetails": {
       "buildingApps": "Next.jsとTypeScriptを使用したモダンなWeb開発",
       "leveragingAI": "AIツールを活用した開発効率の向上",
-      "exploring": "革新的な開発アプローチの探求"
+      "exploring": "革新的な開発アプローチの探求",
+      "previousRole": {
+        "detail1": "写真撮影と動画制作の探求",
+        "detail2": "動画編集ソフトとポストプロダクションの習得",
+        "detail3": "最新のCrypto知識を学び、AIツールを活用してWeb3マーケティング動画を制作"
+      },
+      "earlyRole": {
+        "detail1": "Next.js、Tailwind CSS、Radix UI、Framer Motion、React Queryを使用した洗練されたUIの開発",
+        "detail2": "フロントエンドコンポーネントライブラリとスタイルシステムの実装",
+        "detail3": "フロントエンドのビルドプロセスと開発体験の最適化"
+      }
     }
   },
   "Blog": {

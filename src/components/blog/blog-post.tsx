@@ -46,12 +46,20 @@ const components = {
   li: ({ className = '', ...props }: MDXComponentProps) => (
     <li className={`text-gray-600 dark:text-gray-300 ${className}`} {...props} />
   ),
-  a: ({ className = '', ...props }: MDXComponentProps) => (
-    <a
-      className={`font-medium text-primary underline decoration-primary/30 underline-offset-2 transition-colors hover:decoration-primary/100 ${className}`}
-      {...props}
-    />
-  ),
+  a: ({ className = '', href = '', ...props }: MDXComponentProps) => {
+    const isExternal = href.startsWith('http');
+    return (
+      <a
+        className={`font-medium text-primary underline decoration-primary/30 underline-offset-2 transition-colors hover:decoration-primary/100 ${className}`}
+        href={href}
+        {...(isExternal && {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        })}
+        {...props}
+      />
+    );
+  },
   code: ({ className = '', ...props }: MDXComponentProps) => {
     // If className contains a language (e.g., "language-typescript"), it's a code block
     const isCodeBlock = className?.includes('language-');
@@ -90,6 +98,9 @@ const components = {
       className={`mb-6 border-l-4 border-primary/50 pl-4 italic text-gray-600 dark:text-gray-300 ${className}`}
       {...props}
     />
+  ),
+  hr: ({ className = '', ...props }: MDXComponentProps) => (
+    <hr className={`my-8 border-t border-gray-200 dark:border-gray-700 ${className}`} {...props} />
   ),
 };
 
