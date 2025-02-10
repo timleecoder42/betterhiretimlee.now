@@ -144,7 +144,7 @@ export function HeroSection() {
                 damping: 20,
                 mass: 1,
               }}
-              className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl ring-1 ring-black/5 cursor-pointer"
+              className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl ring-1 ring-black/5"
             >
               <Image
                 src="/timleecoder42.jpg"
