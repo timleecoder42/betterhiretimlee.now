@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import React from 'react';
 
 import { PatternOverlay } from '@/components/ui/background-pattern';
+import { LetterSwapPingPongInView } from '@/components/ui/letter-swap';
 
 export function HeroSection() {
   const t = useTranslations('HomePage');
@@ -41,17 +42,28 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 dark:from-white dark:via-gray-100 dark:to-gray-300 mb-8 whitespace-normal"
+          className="flex flex-row flex-wrap justify-center items-center text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 dark:from-white dark:via-gray-100 dark:to-gray-300 mb-8"
         >
           {t('title')
             .split('Tim Lee')
             .map((part, i, arr) =>
               i === arr.length - 1 ? (
-                <span key={i}>{part.replace(/ /g, '\u00A0')}</span>
+                <span key={i} className="whitespace-nowrap">
+                  {part.replace(/ /g, '\u00A0')}
+                </span>
               ) : (
                 <React.Fragment key={i}>
-                  <span className="inline-block">{part.replace(/ /g, '\u00A0')}</span>
-                  <span className="whitespace-nowrap inline-block">Tim&nbsp;Lee</span>
+                  <span className="whitespace-nowrap">{part.replace(/ /g, '\u00A0')}</span>
+                  <span className="whitespace-nowrap text-gray-900 dark:text-white">
+                    <LetterSwapPingPongInView
+                      label="Tim Lee"
+                      staggerFrom={'first'}
+                      reverse={false}
+                      inViewOnce={true}
+                      inViewDelay={0.5}
+                      inViewDirection="down"
+                    />
+                  </span>
                 </React.Fragment>
               )
             )}

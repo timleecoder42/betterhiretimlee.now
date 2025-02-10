@@ -1,0 +1,112 @@
+---
+title: Enhancing a Letter Swap Animation Component
+date: 2025-02-10
+excerpt: How I enhanced a letter swap animation component with inView triggers and mobile support using Framer Motion.
+---
+
+Recently, I enhanced a letter swap animation component from [Fancy Components](https://www.fancycomponents.dev/docs/components/text/letter-swap) to create a more versatile text animation that works beautifully across all devices. In this post, I'll walk through the key improvements and how they were implemented.
+
+## The Original Component
+
+The original component provided a nice hover effect where text would swap with an alternate version. While it worked well for basic hover interactions, I wanted to add more functionality for a richer user experience.
+
+## Key Enhancements
+
+### 1. InView Animation Trigger
+
+Added the ability to trigger the animation when the component comes into view:
+
+```typescript
+interface TextPropsWithInView extends TextProps {
+  inViewOnce?: boolean; // Trigger animation only once
+  inViewDelay?: number; // Delay before animation starts
+  inViewDirection?: 'up' | 'down'; // Animation direction
+}
+```
+
+This makes it perfect for initial page loads and scroll-based animations. The animation can be configured to run once or multiple times as the element enters the viewport.
+
+### 2. Mobile Support
+
+Added touch gesture support using Framer Motion's tap events:
+
+```typescript
+<motion.span
+  onHoverStart={startAnimation}
+  onHoverEnd={endAnimation}
+  onTapStart={startAnimation}
+  onTapCancel={endAnimation}
+  onTap={endAnimation}
+  {...props}
+>
+```
+
+Now the animation works seamlessly on both desktop and mobile devices, providing a consistent experience across platforms.
+
+### 3. Improved State Management
+
+Implemented robust state management to handle animation sequences:
+
+```typescript
+const [isHovered, setIsHovered] = useState(false);
+const [hasInitialAnimationCompleted, setHasInitialAnimationCompleted] = useState(false);
+const [isInitialAnimating, setIsInitialAnimating] = useState(false);
+```
+
+This prevents animation conflicts and ensures smooth transitions between states.
+
+## Usage Example
+
+Here's how to use the enhanced component:
+
+```typescript
+<LetterSwapPingPongInView
+  label="Tim Lee"
+  staggerFrom={'first'}
+  reverse={false}
+  inViewOnce={true}
+  inViewDelay={0.5}
+  inViewDirection="down"
+/>
+```
+
+## Technical Implementation Details
+
+### Animation Sequence
+
+The component now handles a complex sequence of animations:
+
+1. Initial fade-in when coming into view
+2. Letter swap animation with configurable direction
+3. Reset to initial state for hover/tap interactions
+4. Smooth transitions between all states
+
+### Performance Considerations
+
+- Used debouncing for hover and tap events
+- Implemented proper cleanup of animation states
+- Optimized transitions with Framer Motion's spring animations
+- Careful management of animation timing and delays
+
+## Challenges and Solutions
+
+One of the main challenges was handling the transition between the initial animation and subsequent hover/tap interactions. This was solved by:
+
+1. Proper state tracking with `isInitialAnimating`
+2. Immediate reset of positions after initial animation
+3. Careful timing of state updates
+
+## Future Improvements
+
+Some potential enhancements for the future:
+
+1. Add more animation patterns beyond simple swaps
+2. Support for custom easing functions
+3. Add intersection observer options customization
+4. Support for multi-line text animations
+
+## Conclusion
+
+By enhancing the original letter swap component, we've created a more versatile and robust animation that works well in modern web applications. The component now supports both hover and touch interactions, making it truly cross-platform while maintaining smooth, performant animations.
+
+The full implementation is available in my [GitHub repository](https://github.com/timleecoder42/betterhiretimlee.now/blob/main/src/components/ui/letter-swap.tsx), and I welcome contributions and suggestions for further improvements!

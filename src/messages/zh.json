@@ -64,6 +64,7 @@
   },
   "Blog": {
     "title": "最新博客文章",
-    "description": "关于技术、设计和生活的思考、想法和故事。"
+    "description": "关于技术、设计和生活的思考、想法和故事。",
+    "footer": "本博文与 Cursor AI 共同创作"
   }
 }

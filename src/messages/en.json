@@ -4,7 +4,7 @@
     "description": "Personal portfolio and blog of Tim Lee, a Web Developer passionate about building modern web apps through conversations with AI Agents."
   },
   "HomePage": {
-    "title": "Hi, I’m Tim Lee",
+    "title": "Hi, I'm Tim Lee",
     "subtitle": "Web Developer & AI Enthusiast"
   },
   "Navigation": {
@@ -25,7 +25,7 @@
   },
   "About": {
     "title": "About Me",
-    "description": "I’m a Web Developer passionate about building modern web apps through conversations with AI Agents.",
+    "description": "I'm a Web Developer passionate about building modern web apps through conversations with AI Agents.",
     "skills": "My Skills",
     "skillsDescription": "A collection of technologies and tools I work with",
     "skillCategories": {
@@ -62,6 +62,7 @@
   },
   "Blog": {
     "title": "Latest Blog Posts",
-    "description": "Thoughts, ideas, and stories about technology, design, and life."
+    "description": "Thoughts, ideas, and stories about technology, design, and life.",
+    "footer": "This blog post was co-created with Cursor AI"
   }
 }

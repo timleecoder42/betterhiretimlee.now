@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
+import { BlogFooter } from '@/components/blog/blog-footer';
 import { BlogPostHeader } from '@/components/blog/blog-post-header';
 import type { BlogPost } from '@/types/blog';
 
@@ -112,6 +113,7 @@ export function BlogPost({ post }: { post: BlogPost }) {
         <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-bold prose-a:text-primary prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800">
           <MDXRemote source={post.content} components={components} />
         </div>
+        <BlogFooter />
       </article>
     </div>
   );

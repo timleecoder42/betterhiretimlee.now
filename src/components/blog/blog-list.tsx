@@ -34,14 +34,10 @@ export function BlogList({ posts }: { posts: BlogPost[] }) {
           </div>
           <motion.div variants={container} initial="hidden" animate="show">
             {posts.map(post => (
-              <motion.article
-                key={post.slug}
-                variants={item}
-                className="border-b border-gray-200 dark:border-gray-800 last:border-0"
-              >
+              <motion.article key={post.slug} variants={item} className="last:border-0">
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group flex items-baseline py-6 px-4 -mx-4 transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-800"
+                  className="group flex items-baseline py-3 px-4 -mx-4 transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-800"
                 >
                   <time className="w-32 shrink-0 text-lg text-gray-400 dark:text-gray-500">
                     {post.date}
