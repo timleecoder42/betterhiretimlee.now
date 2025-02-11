@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import React from 'react';
 
-import { PatternOverlay } from '@/components/ui/background-pattern';
+import { BackgroundPattern } from '@/components/ui/background-pattern';
 import { LetterSwapPingPongInView } from '@/components/ui/letter-swap';
 
 export function HeroSection() {
@@ -30,7 +30,7 @@ export function HeroSection() {
       style={{ opacity }}
     >
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
-        <PatternOverlay />
+        <BackgroundPattern />
       </motion.div>
 
       {/* Content */}

@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import {
   newsletterSchema,
   mapButtondownError,
-  NEWSLETTER_ERROR_CODES,
+  NewsletterErrorCode,
 } from '@/lib/validations/newsletter';
 
 const RATE_LIMIT = {
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
 
     if (isRateLimited(ip)) {
-      return NextResponse.json({ code: NEWSLETTER_ERROR_CODES.RATE_LIMITED }, { status: 429 });
+      return NextResponse.json({ code: NewsletterErrorCode.RateLimited }, { status: 429 });
     }
 
     const body = await request.json();
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
 
     const BUTTONDOWN_API_KEY = process.env.BUTTONDOWN_API_KEY;
     if (!BUTTONDOWN_API_KEY) {
-      return NextResponse.json({ code: NEWSLETTER_ERROR_CODES.SERVER_ERROR }, { status: 500 });
+      return NextResponse.json({ code: NewsletterErrorCode.ServerError }, { status: 500 });
     }
 
     const response = await fetch('https://api.buttondown.email/v1/subscribers', {
@@ -88,6 +88,6 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     console.error('Newsletter subscription error:', error);
-    return NextResponse.json({ code: NEWSLETTER_ERROR_CODES.SERVER_ERROR }, { status: 500 });
+    return NextResponse.json({ code: NewsletterErrorCode.ServerError }, { status: 500 });
   }
 }

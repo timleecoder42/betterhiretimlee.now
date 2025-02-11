@@ -20,20 +20,49 @@ excerpt: '国際化、アニメーション、堅牢なエラー処理を備え�
 
 ## 技術的な実装
 
-### 1. Zodによるフォームバリデーション
+### 1. enumを使用した型安全なエラー処理
 
-型安全なフォームバリデーションにZodを使用しています。スキーマはシンプルですが効果的です：
+TypeScriptのenumを使用して型安全なエラー処理を実装し、アプリケーション全体で一貫したエラーコードを確保しています：
+
+```typescript
+export enum NewsletterErrorCode {
+  InvalidEmail = 'INVALID_EMAIL',
+  AlreadySubscribed = 'ALREADY_SUBSCRIBED',
+  RateLimited = 'RATE_LIMITED',
+  ServerError = 'SERVER_ERROR',
+  UnknownError = 'UNKNOWN_ERROR',
+}
+```
+
+この方法は、文字列リテラルと比較してより優れた型安全性と自動補完機能を提供します。
+
+### 2. フォームの状態管理
+
+専用のenumを使用してフォームの状態を管理し、コードの保守性と型安全性を向上させています：
+
+```typescript
+export enum FormStatus {
+  Idle = 'idle',
+  Loading = 'loading',
+  Success = 'success',
+  Error = 'error',
+}
+```
+
+このenumはコンポーネント全体で一貫した状態管理とアニメーション制御に使用されています。
+
+### 3. enumを統合したZodスキーマ
+
+Zodスキーマにエラーenumを統合し、型安全なバリデーションを実現しています：
 
 ```typescript
 export const newsletterSchema = z.object({
-  email: z.string().email({ message: NEWSLETTER_ERROR_CODES.INVALID_EMAIL }),
+  email: z.string().email({ message: NewsletterErrorCode.InvalidEmail }),
   locale: z.string().min(2).max(10),
 });
 ```
 
-これにより、有効なメールアドレスを受け取り、ローカライズされたニュースレター用にユーザーのロケールを取得できます。
-
-### 2. レート制限付きAPIルート
+### 4. レート制限付きAPIルート
 
 APIルートには乱用を防ぐためのレート制限が含まれています：
 
@@ -41,51 +70,41 @@ APIルートには乱用を防ぐためのレート制限が含まれていま�
 const RATE_LIMIT = {
   WINDOW: 3600000, // 1時間（ミリ秒）
   MAX_REQUESTS: 10,
-};
+} as const;
 ```
 
 IPアドレスごとのリクエストを追跡し、1時間あたり10回の試行に制限しています。
 
-### 3. エラー処理
+### 5. アニメーションUIコンポーネント
 
-ローカライズされたエラーメッセージを含む包括的なエラー処理システムを実装しています：
+フォームにはFramer Motionを使用したスムーズなアニメーションが実装され、アニメーションのバリアントは保守性を高めるために整理されています：
 
 ```typescript
-export const NEWSLETTER_ERROR_CODES = {
-  INVALID_EMAIL: 'INVALID_EMAIL',
-  ALREADY_SUBSCRIBED: 'ALREADY_SUBSCRIBED',
-  RATE_LIMITED: 'RATE_LIMITED',
-  SERVER_ERROR: 'SERVER_ERROR',
-  UNKNOWN_ERROR: 'UNKNOWN_ERROR',
+export const buttonVariants: Variants = {
+  [FormStatus.Idle]: {
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 10,
+    },
+  },
+  [FormStatus.Loading]: {
+    opacity: 0.75,
+  },
+  [FormStatus.Success]: {
+    opacity: 0.75,
+  },
 };
-```
-
-各エラーコードには複数の言語での翻訳が対応しており、ユーザーが使用する言語に関係なく、何が問題であるかを理解できるようになっています。
-
-### 4. アニメーションUIコンポーネント
-
-購読フォームにはFramer Motionを使用したスムーズなアニメーションが実装されています：
-
-```tsx
-<AnimatePresence mode="wait">
-  <motion.span
-    key="status"
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -10 }}
-  >
-    {/* ステータスメッセージ */}
-  </motion.span>
-</AnimatePresence>
 ```
 
 アニメーションは以下の状態に視覚的なフィードバックを提供します：
 
-- ボタンの状態変化（アイドル → ローディング → 成功）
+- フォームの状態遷移（アイドル → ローディング → 成功/エラー）
 - エラーメッセージの表示
-- フォーム送信の状態
+- ボタンの状態変化
 
-### 5. Buttondownとの統合
+### 6. Buttondownとの統合
 
 ニュースレターサービスとしてButtondownを使用しており、タグやメタデータなどの便利な機能を提供する清潔なAPIを備えています：
 
@@ -96,25 +115,32 @@ const response = await fetch('https://api.buttondown.email/v1/subscribers', {
     Authorization: `Token ${BUTTONDOWN_API_KEY}`,
   },
   body: JSON.stringify({
-    email_address: email,
+    email_address: result.data.email,
+    type: 'regular',
     metadata: {
-      locale: locale,
+      locale: result.data.locale,
     },
   }),
 });
 ```
 
-ロケール情報はメタデータとして保存され、将来的なセグメンテーションやローカライズされたニュースレターの可能性を提供します。
+## コードの構成
+
+コードベースは以下の主要なファイルに分かれています：
+
+1. `types.ts` - 共有の型とenum
+2. `newsletter-form.tsx` - メインのフォームコンポーネント
+3. `newsletter-form.variants.ts` - アニメーションのバリアント
+4. `validations/newsletter.ts` - バリデーションスキーマとエラー処理
+
+この関心の分離により、コードの保守性とテスト容易性が向上しています。
 
 ## ユーザーエクスペリエンスの考慮事項
 
-1. **視覚的フィードバック**：送信ボタンは、状態遷移時にスムーズなアニメーションでローディングと成功状態を表示します。
-
-2. **エラー処理**：エラーメッセージは穏やかなアニメーションで表示され、自然なフローで配置され、すべてのデバイスで視認性が確保されています。
-
-3. **レスポンシブデザイン**：フォームは様々な画面サイズに美しく適応し、すべてのデバイスで使いやすさと美しさを維持します。
-
-4. **ダークモード**：ニュースレターフォームはユーザーのテーマ設定を尊重し、ライトモードとダークモード両方に対して慎重に選択された色を使用します。
+1. **視覚的フィードバック**：送信ボタンは状態遷移時にスムーズなアニメーションでローディングと成功状態を表示
+2. **エラー処理**：エラーメッセージは穏やかなアニメーションで表示され、自然なフローで配置
+3. **レスポンシブデザイン**：フォームは様々な画面サイズに美しく適応
+4. **ダークモード**：フォームはユーザーのテーマ設定を尊重
 
 ## 将来の改善点
 
@@ -128,8 +154,8 @@ const response = await fetch('https://api.buttondown.email/v1/subscribers', {
 
 ## 結論
 
-ニュースレターシステムの構築は、単にメールアドレスを収集する以上のものです。ユーザーエクスペリエンス、国際化、堅牢なエラー処理に焦点を当てることで、機能的で使い心地の良いシステムを作成することができました。
+ニュースレターシステムの構築は、単にメールアドレスを収集する以上のものです。型安全性、コード構成、ユーザーエクスペリエンス、堅牢なエラー処理に焦点を当てることで、機能的で使い心地の良いシステムを作成することができました。
 
-実装の詳細については、[フッターコンポーネント](https://github.com/timleecoder42/betterhiretimlee.now/blob/main/src/components/layout/footer.tsx)と[APIルート](https://github.com/timleecoder42/betterhiretimlee.now/blob/main/src/app/api/newsletter/route.ts)をご覧ください。あなた自身のプロジェクトのインスピレーションとしてご活用ください！
+実装の詳細については、[NewsletterFormコンポーネント](https://github.com/timleecoder42/betterhiretimlee.now/blob/main/src/components/newsletter/newsletter-form.tsx)と[APIルート](https://github.com/timleecoder42/betterhiretimlee.now/blob/main/src/app/api/newsletter/route.ts)をご覧ください。あなた自身のプロジェクトのインスピレーションとしてご活用ください！
 
 実際に試してみたいですか？このページの下部までスクロールして、ニュースレター購読フォームを試してみてください！🚀

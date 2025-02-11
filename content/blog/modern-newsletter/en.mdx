@@ -20,20 +20,49 @@ The newsletter system includes several key features:
 
 ## Technical Implementation
 
-### 1. Form Validation with Zod
+### 1. Type-Safe Error Handling with Enums
 
-We use Zod for type-safe form validation. The schema is simple but effective:
+We use TypeScript enums for type-safe error handling, ensuring consistent error codes across the application:
+
+```typescript
+export enum NewsletterErrorCode {
+  InvalidEmail = 'INVALID_EMAIL',
+  AlreadySubscribed = 'ALREADY_SUBSCRIBED',
+  RateLimited = 'RATE_LIMITED',
+  ServerError = 'SERVER_ERROR',
+  UnknownError = 'UNKNOWN_ERROR',
+}
+```
+
+This approach provides better type safety and autocompletion compared to string literals.
+
+### 2. Form State Management
+
+We manage form states using a dedicated enum, making the code more maintainable and type-safe:
+
+```typescript
+export enum FormStatus {
+  Idle = 'idle',
+  Loading = 'loading',
+  Success = 'success',
+  Error = 'error',
+}
+```
+
+This enum is used throughout the component for consistent state management and animations.
+
+### 3. Zod Schema with Enum Integration
+
+Our Zod schema integrates with the error enum for type-safe validation:
 
 ```typescript
 export const newsletterSchema = z.object({
-  email: z.string().email({ message: NEWSLETTER_ERROR_CODES.INVALID_EMAIL }),
+  email: z.string().email({ message: NewsletterErrorCode.InvalidEmail }),
   locale: z.string().min(2).max(10),
 });
 ```
 
-This ensures we receive valid email addresses and capture the user's locale for potential localized newsletters.
-
-### 2. API Route with Rate Limiting
+### 4. API Route with Rate Limiting
 
 The API route includes rate limiting to prevent abuse:
 
@@ -41,51 +70,41 @@ The API route includes rate limiting to prevent abuse:
 const RATE_LIMIT = {
   WINDOW: 3600000, // 1 hour in milliseconds
   MAX_REQUESTS: 10,
-};
+} as const;
 ```
 
 We track requests per IP address and enforce a limit of 10 attempts per hour.
 
-### 3. Error Handling
+### 5. Animated UI Components
 
-We've implemented a comprehensive error handling system with localized error messages:
+The form features smooth animations using Framer Motion, with variants organized for better maintainability:
 
 ```typescript
-export const NEWSLETTER_ERROR_CODES = {
-  INVALID_EMAIL: 'INVALID_EMAIL',
-  ALREADY_SUBSCRIBED: 'ALREADY_SUBSCRIBED',
-  RATE_LIMITED: 'RATE_LIMITED',
-  SERVER_ERROR: 'SERVER_ERROR',
-  UNKNOWN_ERROR: 'UNKNOWN_ERROR',
+export const buttonVariants: Variants = {
+  [FormStatus.Idle]: {
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 10,
+    },
+  },
+  [FormStatus.Loading]: {
+    opacity: 0.75,
+  },
+  [FormStatus.Success]: {
+    opacity: 0.75,
+  },
 };
-```
-
-Each error code has corresponding translations in multiple languages, ensuring users understand what went wrong regardless of their language preference.
-
-### 4. Animated UI Components
-
-The subscription form features smooth animations using Framer Motion:
-
-```tsx
-<AnimatePresence mode="wait">
-  <motion.span
-    key="status"
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -10 }}
-  >
-    {/* Status message */}
-  </motion.span>
-</AnimatePresence>
 ```
 
 The animations provide visual feedback for:
 
-- Button state changes (idle → loading → success)
+- Form state transitions (idle → loading → success/error)
 - Error message appearances
-- Form submission states
+- Button state changes
 
-### 5. Buttondown Integration
+### 6. Buttondown Integration
 
 We use Buttondown as our newsletter service, which offers a clean API and useful features like tags and metadata:
 
@@ -96,25 +115,32 @@ const response = await fetch('https://api.buttondown.email/v1/subscribers', {
     Authorization: `Token ${BUTTONDOWN_API_KEY}`,
   },
   body: JSON.stringify({
-    email_address: email,
+    email_address: result.data.email,
+    type: 'regular',
     metadata: {
-      locale: locale,
+      locale: result.data.locale,
     },
   }),
 });
 ```
 
-The locale information is stored as metadata, allowing for potential segmentation and localized newsletters in the future.
+## Code Organization
+
+The codebase is organized into several key files:
+
+1. `types.ts` - Contains shared types and enums
+2. `newsletter-form.tsx` - Main form component
+3. `newsletter-form.variants.ts` - Animation variants
+4. `validations/newsletter.ts` - Validation schema and error handling
+
+This separation of concerns makes the code more maintainable and easier to test.
 
 ## User Experience Considerations
 
 1. **Visual Feedback**: The submit button transforms to show loading and success states, with smooth animations for state transitions.
-
-2. **Error Handling**: Error messages appear with a gentle animation and are positioned naturally in the flow, ensuring they're visible on all devices.
-
-3. **Responsive Design**: The form adapts beautifully to different screen sizes, maintaining usability and aesthetics across devices.
-
-4. **Dark Mode**: The newsletter form respects the user's theme preference, with carefully chosen colors for both light and dark modes.
+2. **Error Handling**: Error messages appear with a gentle animation and are positioned naturally in the flow.
+3. **Responsive Design**: The form adapts beautifully to different screen sizes.
+4. **Dark Mode**: The form respects the user's theme preference.
 
 ## Future Improvements
 
@@ -128,8 +154,8 @@ Some potential enhancements we could add:
 
 ## Conclusion
 
-Building a newsletter system goes beyond just collecting email addresses. By focusing on user experience, internationalization, and robust error handling, we've created a system that's both functional and delightful to use.
+Building a newsletter system goes beyond just collecting email addresses. By focusing on type safety, code organization, user experience, and robust error handling, we've created a system that's both functional and delightful to use.
 
-Check out the [footer component](https://github.com/timleecoder42/betterhiretimlee.now/blob/main/src/components/layout/footer.tsx) and [API route](https://github.com/timleecoder42/betterhiretimlee.now/blob/main/src/app/api/newsletter/route.ts) for the implementation details. Feel free to use it as inspiration for your own projects!
+Check out the [NewsletterForm component](https://github.com/timleecoder42/betterhiretimlee.now/blob/main/src/components/newsletter/newsletter-form.tsx) and [API route](https://github.com/timleecoder42/betterhiretimlee.now/blob/main/src/app/api/newsletter/route.ts) for the implementation details. Feel free to use it as inspiration for your own projects!
 
 Want to see it in action? Just scroll down to the bottom of this page to try the newsletter subscription form yourself! 🚀
