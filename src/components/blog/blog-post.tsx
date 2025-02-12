@@ -18,17 +18,17 @@ type MDXComponentProps = {
 
 const components = {
   h1: ({ className = '', ...props }: MDXComponentProps) => (
-    <h1 className={`mb-6 text-3xl font-bold tracking-tight sm:text-4xl ${className}`} {...props} />
+    <h1 className={`mb-6 text-2xl font-bold tracking-tight sm:text-3xl ${className}`} {...props} />
   ),
   h2: ({ className = '', ...props }: MDXComponentProps) => (
     <h2
-      className={`mb-4 mt-12 text-2xl font-bold tracking-tight sm:text-3xl ${className}`}
+      className={`mb-4 mt-12 text-xl font-bold tracking-tight sm:text-2xl ${className}`}
       {...props}
     />
   ),
   h3: ({ className = '', ...props }: MDXComponentProps) => (
     <h3
-      className={`mb-4 mt-8 text-xl font-bold tracking-tight sm:text-2xl ${className}`}
+      className={`mb-4 mt-8 text-lg font-bold tracking-tight sm:text-xl ${className}`}
       {...props}
     />
   ),

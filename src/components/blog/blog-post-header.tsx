@@ -15,7 +15,7 @@ export function BlogPostHeader({ title, date }: BlogPostHeaderProps) {
         animate={{ opacity: 1 }}
         className="mb-4 text-lg text-gray-400 dark:text-gray-500"
       >
-        <time>{date}</time>
+        <time className="font-mono">{date}</time>
       </motion.div>
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
