@@ -4,8 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
-import { useState } from 'react';
+import { useReducer, useEffect } from 'react';
 
+import {
+  newsletterFormReducer,
+  initialState,
+} from '@/components/newsletter/newsletter-form.reducer';
 import {
   formVariants,
   messageVariants,
@@ -22,27 +26,30 @@ import {
 export function NewsletterForm() {
   const t = useTranslations('Footer');
   const locale = useLocale();
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<FormStatus>(FormStatus.Idle);
-  const [message, setMessage] = useState('');
+  const [state, dispatch] = useReducer(newsletterFormReducer, initialState);
 
-  const resetForm = () => {
-    setStatus(FormStatus.Idle);
-    setMessage('');
-  };
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    if (state.status === FormStatus.Success || state.status === FormStatus.Error) {
+      timeoutId = setTimeout(() => {
+        dispatch({ type: 'RESET' });
+      }, 5000);
+    }
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [state.status]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus(FormStatus.Loading);
+    dispatch({ type: 'SET_LOADING' });
 
     try {
       // Client-side validation
-      const result = newsletterSchema.safeParse({ email, locale });
+      const result = newsletterSchema.safeParse({ email: state.email, locale });
       if (!result.success) {
         const errorCode = result.error.errors[0]?.message;
-        setStatus(FormStatus.Error);
-        setMessage(t(`errors.${errorCode}`));
-        setTimeout(resetForm, 5000);
+        dispatch({ type: 'SET_ERROR', payload: t(`errors.${errorCode}`) });
         return;
       }
 
@@ -56,20 +63,13 @@ export function NewsletterForm() {
       const data = await response.json();
 
       if (response.ok) {
-        setStatus(FormStatus.Success);
-        setEmail('');
-        setMessage(''); // Clear any existing error message
+        dispatch({ type: 'SET_SUCCESS' });
       } else {
-        setStatus(FormStatus.Error);
-        setMessage(t(`errors.${data.code}`));
+        dispatch({ type: 'SET_ERROR', payload: t(`errors.${data.code}`) });
       }
     } catch {
-      setStatus(FormStatus.Error);
-      setMessage(t(`errors.${NewsletterErrorCode.UnknownError}`));
+      dispatch({ type: 'SET_ERROR', payload: t(`errors.${NewsletterErrorCode.UnknownError}`) });
     }
-
-    // Reset status and message after 5 seconds
-    setTimeout(resetForm, 5000);
   };
 
   return (
@@ -89,15 +89,15 @@ export function NewsletterForm() {
             type="email"
             name="email"
             placeholder={t('newsletterPlaceholder')}
-            value={email}
-            onChange={e => setEmail(e.target.value)}
+            value={state.email}
+            onChange={e => dispatch({ type: 'SET_EMAIL', payload: e.target.value })}
             className="w-full px-5 py-3 rounded-full bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 shadow-sm"
             required
-            disabled={status === FormStatus.Loading || status === FormStatus.Success}
+            disabled={state.status === FormStatus.Loading || state.status === FormStatus.Success}
           />
           <div className="h-4 relative">
             <AnimatePresence>
-              {message && status === FormStatus.Error && (
+              {state.message && state.status === FormStatus.Error && (
                 <motion.div
                   variants={messageVariants}
                   initial="initial"
@@ -106,7 +106,7 @@ export function NewsletterForm() {
                   transition={{ duration: 0.2 }}
                   className="absolute top-1 inset-x-0 text-sm text-center text-red-600 dark:text-red-400"
                 >
-                  <p className="px-2 break-words">{message}</p>
+                  <p className="px-2 break-words">{state.message}</p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -116,15 +116,15 @@ export function NewsletterForm() {
           type="submit"
           variants={buttonVariants}
           initial={FormStatus.Idle}
-          whileHover={status === FormStatus.Idle ? 'hover' : undefined}
-          whileTap={status === FormStatus.Idle ? 'tap' : undefined}
-          animate={status}
-          disabled={status === FormStatus.Loading || status === FormStatus.Success}
+          whileHover={state.status === FormStatus.Idle ? 'hover' : undefined}
+          whileTap={state.status === FormStatus.Idle ? 'tap' : undefined}
+          animate={state.status}
+          disabled={state.status === FormStatus.Loading || state.status === FormStatus.Success}
           className="w-full sm:w-[220px] relative px-4 py-3 text-white rounded-full shadow-sm font-medium overflow-hidden group whitespace-nowrap flex items-center justify-center disabled:opacity-75 disabled:cursor-not-allowed"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400 animate-gradient" />
           <AnimatePresence mode="wait">
-            {status === FormStatus.Loading ? (
+            {state.status === FormStatus.Loading ? (
               <motion.span
                 key="loading"
                 variants={statusVariants}
@@ -136,7 +136,7 @@ export function NewsletterForm() {
                 <Loader2 className="w-5 h-5 animate-spin" />
                 {t('loading')}
               </motion.span>
-            ) : status === FormStatus.Success ? (
+            ) : state.status === FormStatus.Success ? (
               <motion.span
                 key="success"
                 variants={statusVariants}

@@ -17,6 +17,7 @@ excerpt: '深入探讨如何创建一个具有国际化、动画效果和强大�
 - 🔄 全面的错误处理
 - 📱 响应式设计
 - 🌙 深色模式支持
+- 🔄 使用 Reducer 的集中状态管理
 
 ## 技术实现
 
@@ -36,7 +37,72 @@ export enum NewsletterErrorCode {
 
 与字符串字面量相比，这种方法提供了更好的类型安全性和自动补全功能。
 
-### 2. 表单状态管理
+### 2. 使用 Reducer 模式的状态管理
+
+我们采用 Reducer 模式进行集中状态管理，使代码更易维护且更可预测：
+
+```typescript
+interface NewsletterFormState {
+  email: string;
+  status: FormStatus;
+  message: string;
+}
+
+type NewsletterFormAction =
+  | { type: 'SET_EMAIL'; payload: string }
+  | { type: 'SET_LOADING' }
+  | { type: 'SET_SUCCESS' }
+  | { type: 'SET_ERROR'; payload: string }
+  | { type: 'RESET' };
+
+export function newsletterFormReducer(
+  state: NewsletterFormState,
+  action: NewsletterFormAction
+): NewsletterFormState {
+  switch (action.type) {
+    case 'SET_EMAIL':
+      return { ...state, email: action.payload };
+    case 'SET_LOADING':
+      return { ...state, status: FormStatus.Loading, message: '' };
+    case 'SET_SUCCESS':
+      return { ...state, status: FormStatus.Success, email: '', message: '' };
+    case 'SET_ERROR':
+      return { ...state, status: FormStatus.Error, message: action.payload };
+    case 'RESET':
+      return { ...state, status: FormStatus.Idle, message: '' };
+    default:
+      return state;
+  }
+}
+```
+
+这种方法带来以下好处：
+
+- 将状态逻辑集中在一处
+- 类型安全的状态转换
+- 可预测的状态更新
+- 纯函数便于测试
+- 更好的代码组织
+
+表单组件使用 React 的 `useReducer` Hook 来使用这个 Reducer：
+
+```typescript
+const [state, dispatch] = useReducer(newsletterFormReducer, initialState);
+
+// 表单提交示例
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  dispatch({ type: 'SET_LOADING' });
+  try {
+    // 表单提交逻辑...
+    dispatch({ type: 'SET_SUCCESS' });
+  } catch {
+    dispatch({ type: 'SET_ERROR', payload: errorMessage });
+  }
+};
+```
+
+### 3. 表单状态管理
 
 我们使用专门的枚举来管理表单状态，使代码更易维护且类型安全：
 
@@ -51,7 +117,7 @@ export enum FormStatus {
 
 这个枚举在组件中用于一致的状态管理和动画控制。
 
-### 3. 集成枚举的 Zod 验证模式
+### 4. 集成枚举的 Zod 验证模式
 
 我们的 Zod 验证模式与错误枚举集成，实现类型安全的验证：
 
@@ -62,7 +128,7 @@ export const newsletterSchema = z.object({
 });
 ```
 
-### 4. 带速率限制的 API 路由
+### 5. 带速率限制的 API 路由
 
 API 路由包含速率限制以防止滥用：
 
@@ -75,7 +141,7 @@ const RATE_LIMIT = {
 
 我们跟踪每个 IP 地址的请求，并限制每小时最多 10 次尝试。
 
-### 5. 动画 UI 组件
+### 6. 动画 UI 组件
 
 表单使用 Framer Motion 实现流畅的动画效果，动画变体经过组织以提高可维护性：
 
@@ -104,7 +170,7 @@ export const buttonVariants: Variants = {
 - 错误消息出现
 - 按钮状态变化
 
-### 6. Buttondown 集成
+### 7. Buttondown 集成
 
 我们使用 Buttondown 作为订阅服务，它提供了清晰的 API 和有用的功能，如标签和元数据：
 

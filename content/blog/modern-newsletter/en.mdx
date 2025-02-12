@@ -17,6 +17,7 @@ The newsletter system includes several key features:
 - 🔄 Comprehensive error handling
 - 📱 Responsive design
 - 🌙 Dark mode support
+- 🔄 Centralized state management with reducers
 
 ## Technical Implementation
 
@@ -36,7 +37,72 @@ export enum NewsletterErrorCode {
 
 This approach provides better type safety and autocompletion compared to string literals.
 
-### 2. Form State Management
+### 2. State Management with Reducer Pattern
+
+We use a reducer pattern for centralized state management, making the code more maintainable and predictable:
+
+```typescript
+interface NewsletterFormState {
+  email: string;
+  status: FormStatus;
+  message: string;
+}
+
+type NewsletterFormAction =
+  | { type: 'SET_EMAIL'; payload: string }
+  | { type: 'SET_LOADING' }
+  | { type: 'SET_SUCCESS' }
+  | { type: 'SET_ERROR'; payload: string }
+  | { type: 'RESET' };
+
+export function newsletterFormReducer(
+  state: NewsletterFormState,
+  action: NewsletterFormAction
+): NewsletterFormState {
+  switch (action.type) {
+    case 'SET_EMAIL':
+      return { ...state, email: action.payload };
+    case 'SET_LOADING':
+      return { ...state, status: FormStatus.Loading, message: '' };
+    case 'SET_SUCCESS':
+      return { ...state, status: FormStatus.Success, email: '', message: '' };
+    case 'SET_ERROR':
+      return { ...state, status: FormStatus.Error, message: action.payload };
+    case 'RESET':
+      return { ...state, status: FormStatus.Idle, message: '' };
+    default:
+      return state;
+  }
+}
+```
+
+This approach offers several benefits:
+
+- Centralized state logic in one place
+- Type-safe state transitions
+- Predictable state updates
+- Easier testing with pure functions
+- Better code organization
+
+The form component uses the reducer with React's `useReducer` hook:
+
+```typescript
+const [state, dispatch] = useReducer(newsletterFormReducer, initialState);
+
+// Example usage in form submission
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  dispatch({ type: 'SET_LOADING' });
+  try {
+    // Form submission logic...
+    dispatch({ type: 'SET_SUCCESS' });
+  } catch {
+    dispatch({ type: 'SET_ERROR', payload: errorMessage });
+  }
+};
+```
+
+### 3. Form Status Management
 
 We manage form states using a dedicated enum, making the code more maintainable and type-safe:
 
@@ -51,7 +117,7 @@ export enum FormStatus {
 
 This enum is used throughout the component for consistent state management and animations.
 
-### 3. Zod Schema with Enum Integration
+### 4. Zod Schema with Enum Integration
 
 Our Zod schema integrates with the error enum for type-safe validation:
 
@@ -62,7 +128,7 @@ export const newsletterSchema = z.object({
 });
 ```
 
-### 4. API Route with Rate Limiting
+### 5. API Route with Rate Limiting
 
 The API route includes rate limiting to prevent abuse:
 
@@ -75,7 +141,7 @@ const RATE_LIMIT = {
 
 We track requests per IP address and enforce a limit of 10 attempts per hour.
 
-### 5. Animated UI Components
+### 6. Animated UI Components
 
 The form features smooth animations using Framer Motion, with variants organized for better maintainability:
 
@@ -104,7 +170,7 @@ The animations provide visual feedback for:
 - Error message appearances
 - Button state changes
 
-### 6. Buttondown Integration
+### 7. Buttondown Integration
 
 We use Buttondown as our newsletter service, which offers a clean API and useful features like tags and metadata:
 

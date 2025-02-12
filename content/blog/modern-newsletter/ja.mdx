@@ -17,6 +17,7 @@ excerpt: '国際化、アニメーション、堅牢なエラー処理を備え�
 - 🔄 包括的なエラー処理
 - 📱 レスポンシブデザイン
 - 🌙 ダークモード対応
+- 🔄 Reducerを使用した集中的な状態管理
 
 ## 技術的な実装
 
@@ -36,7 +37,72 @@ export enum NewsletterErrorCode {
 
 この方法は、文字列リテラルと比較してより優れた型安全性と自動補完機能を提供します。
 
-### 2. フォームの状態管理
+### 2. Reducerパターンを使用した状態管理
+
+集中的な状態管理のためにReducerパターンを採用し、コードの保守性と予測可能性を向上させています：
+
+```typescript
+interface NewsletterFormState {
+  email: string;
+  status: FormStatus;
+  message: string;
+}
+
+type NewsletterFormAction =
+  | { type: 'SET_EMAIL'; payload: string }
+  | { type: 'SET_LOADING' }
+  | { type: 'SET_SUCCESS' }
+  | { type: 'SET_ERROR'; payload: string }
+  | { type: 'RESET' };
+
+export function newsletterFormReducer(
+  state: NewsletterFormState,
+  action: NewsletterFormAction
+): NewsletterFormState {
+  switch (action.type) {
+    case 'SET_EMAIL':
+      return { ...state, email: action.payload };
+    case 'SET_LOADING':
+      return { ...state, status: FormStatus.Loading, message: '' };
+    case 'SET_SUCCESS':
+      return { ...state, status: FormStatus.Success, email: '', message: '' };
+    case 'SET_ERROR':
+      return { ...state, status: FormStatus.Error, message: action.payload };
+    case 'RESET':
+      return { ...state, status: FormStatus.Idle, message: '' };
+    default:
+      return state;
+  }
+}
+```
+
+このアプローチには以下の利点があります：
+
+- 状態ロジックを一箇所に集中
+- 型安全な状態遷移
+- 予測可能な状態更新
+- 純粋関数によるテストの容易さ
+- より良いコード構成
+
+フォームコンポーネントではReactの`useReducer`フックを使用してこのReducerを利用します：
+
+```typescript
+const [state, dispatch] = useReducer(newsletterFormReducer, initialState);
+
+// フォーム送信での使用例
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  dispatch({ type: 'SET_LOADING' });
+  try {
+    // フォーム送信のロジック...
+    dispatch({ type: 'SET_SUCCESS' });
+  } catch {
+    dispatch({ type: 'SET_ERROR', payload: errorMessage });
+  }
+};
+```
+
+### 3. フォームの状態管理
 
 専用のenumを使用してフォームの状態を管理し、コードの保守性と型安全性を向上させています：
 
@@ -51,7 +117,7 @@ export enum FormStatus {
 
 このenumはコンポーネント全体で一貫した状態管理とアニメーション制御に使用されています。
 
-### 3. enumを統合したZodスキーマ
+### 4. enumを統合したZodスキーマ
 
 Zodスキーマにエラーenumを統合し、型安全なバリデーションを実現しています：
 
@@ -62,7 +128,7 @@ export const newsletterSchema = z.object({
 });
 ```
 
-### 4. レート制限付きAPIルート
+### 5. レート制限付きAPIルート
 
 APIルートには乱用を防ぐためのレート制限が含まれています：
 
@@ -75,7 +141,7 @@ const RATE_LIMIT = {
 
 IPアドレスごとのリクエストを追跡し、1時間あたり10回の試行に制限しています。
 
-### 5. アニメーションUIコンポーネント
+### 6. アニメーションUIコンポーネント
 
 フォームにはFramer Motionを使用したスムーズなアニメーションが実装され、アニメーションのバリアントは保守性を高めるために整理されています：
 
@@ -104,7 +170,7 @@ export const buttonVariants: Variants = {
 - エラーメッセージの表示
 - ボタンの状態変化
 
-### 6. Buttondownとの統合
+### 7. Buttondownとの統合
 
 ニュースレターサービスとしてButtondownを使用しており、タグやメタデータなどの便利な機能を提供する清潔なAPIを備えています：
 
