@@ -102,6 +102,205 @@ const handleSubmit = async (e: React.FormEvent) => {
 };
 ```
 
+### Alternative State Management Solutions
+
+We can also implement the state management using popular libraries. Here are three different approaches:
+
+_Note: You can find each implementation in the [src/components/newsletter](https://github.com/timleecoder42/betterhiretimlee.now/tree/main/src/components/newsletter) directory._
+
+#### Zustand Implementation
+
+Zustand offers a minimalistic approach with hooks-based state management.
+
+**Benefits:**
+
+- Minimal boilerplate
+- Simple hooks-based API
+- Built-in TypeScript support
+- Easy to understand and maintain
+
+<details>
+<summary>View Code</summary>
+
+```typescript
+import { create } from 'zustand';
+
+interface NewsletterState {
+  email: string;
+  status: FormStatus;
+  message: string;
+  setEmail: (email: string) => void;
+  setLoading: () => void;
+  setSuccess: () => void;
+  setError: (message: string) => void;
+  reset: () => void;
+}
+
+export const useNewsletterStore = create<NewsletterState>(set => ({
+  email: '',
+  status: FormStatus.Idle,
+  message: '',
+  setEmail: email => set({ email }),
+  setLoading: () => set({ status: FormStatus.Loading, message: '' }),
+  setSuccess: () => set({ status: FormStatus.Success, email: '', message: '' }),
+  setError: message => set({ status: FormStatus.Error, message }),
+  reset: () => set({ status: FormStatus.Idle, message: '' }),
+}));
+
+// Usage Example
+function NewsletterForm() {
+  const { email, status, message, setEmail, setLoading, setSuccess, setError } =
+    useNewsletterStore();
+
+  // ... rest of the component
+}
+```
+
+</details>
+
+#### Jotai Implementation
+
+Jotai provides atomic state management with fine-grained updates.
+
+**Benefits:**
+
+- Atomic state updates
+- Fine-grained reactivity
+- Great for complex state dependencies
+- Built-in React Suspense support
+
+<details>
+<summary>View Code</summary>
+
+```typescript
+import { atom } from 'jotai';
+
+interface NewsletterState {
+  email: string;
+  status: FormStatus;
+  message: string;
+}
+
+export const newsletterAtom = atom<NewsletterState>({
+  email: '',
+  status: FormStatus.Idle,
+  message: '',
+});
+
+// Derived atoms for individual state pieces
+export const emailAtom = atom(
+  get => get(newsletterAtom).email,
+  (get, set, email: string) => set(newsletterAtom, { ...get(newsletterAtom), email })
+);
+
+// Action atoms
+export const setLoadingAtom = atom(null, (get, set) =>
+  set(newsletterAtom, { ...get(newsletterAtom), status: FormStatus.Loading, message: '' })
+);
+
+// Usage Example
+function NewsletterForm() {
+  const [email, setEmail] = useAtom(emailAtom);
+  const [status] = useAtom(statusAtom);
+  const [, setLoading] = useAtom(setLoadingAtom);
+
+  // ... rest of the component
+}
+```
+
+</details>
+
+#### Valtio Implementation
+
+Valtio offers a proxy-based approach with intuitive state updates.
+
+**Benefits:**
+
+- Intuitive mutable syntax
+- Automatic tracking of state updates
+- Works great with vanilla JavaScript
+- Excellent TypeScript support
+
+<details>
+<summary>View Code</summary>
+
+```typescript
+import { proxy } from 'valtio';
+
+interface NewsletterState {
+  email: string;
+  status: FormStatus;
+  message: string;
+}
+
+export const newsletterState = proxy<NewsletterState>({
+  email: '',
+  status: FormStatus.Idle,
+  message: '',
+});
+
+export const newsletterActions = {
+  setEmail: (email: string) => {
+    newsletterState.email = email;
+  },
+  setLoading: () => {
+    newsletterState.status = FormStatus.Loading;
+    newsletterState.message = '';
+  },
+  // ... other actions
+};
+
+// Usage Example
+function NewsletterForm() {
+  const state = useSnapshot(newsletterState);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    newsletterActions.setLoading();
+    // ... rest of the logic
+  };
+}
+```
+
+</details>
+
+#### Comparing the Approaches
+
+Each state management solution has its strengths:
+
+1. **Reducer Pattern**
+
+   - Traditional and well-understood
+   - Great for complex state logic
+   - Built into React
+   - No additional dependencies
+
+2. **Zustand**
+
+   - Minimal boilerplate
+   - Simple API
+   - Great for small to medium applications
+   - Easy to learn
+
+3. **Jotai**
+
+   - Atomic updates
+   - Fine-grained control
+   - Great for complex state relationships
+   - React Suspense ready
+
+4. **Valtio**
+   - Intuitive API
+   - Proxy-based updates
+   - Works outside React
+   - Familiar syntax
+
+Choose the approach that best fits your needs:
+
+- Use the **Reducer Pattern** for traditional React applications
+- Use **Zustand** for simple state management with minimal setup
+- Use **Jotai** when you need atomic state with fine-grained updates
+- Use **Valtio** when you want intuitive, mutable-style updates
+
 ### 3. Form Status Management
 
 We manage form states using a dedicated enum, making the code more maintainable and type-safe:

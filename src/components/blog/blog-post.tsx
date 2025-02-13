@@ -32,6 +32,12 @@ const components = {
       {...props}
     />
   ),
+  h4: ({ className = '', ...props }: MDXComponentProps) => (
+    <h4
+      className={`mb-4 mt-6 text-base font-bold tracking-tight sm:text-lg ${className}`}
+      {...props}
+    />
+  ),
   p: ({ className = '', ...props }: MDXComponentProps) => (
     <p
       className={`mb-6 leading-relaxed text-gray-600 dark:text-gray-300 ${className}`}

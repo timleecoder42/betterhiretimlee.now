@@ -102,6 +102,205 @@ const handleSubmit = async (e: React.FormEvent) => {
 };
 ```
 
+### 替代状态管理方案
+
+我们还可以使用流行的库来实现状态管理。以下是三种不同的方法：
+
+_说明：您可以在 [src/components/newsletter](https://github.com/timleecoder42/betterhiretimlee.now/tree/main/src/components/newsletter) 目录中找到每种实现。_
+
+#### Zustand 实现
+
+Zustand 提供了一种基于 hooks 的极简状态管理方法。
+
+**优点：**
+
+- 最少的样板代码
+- 简单的 hooks 式 API
+- 内置 TypeScript 支持
+- 易于理解和维护
+
+<details>
+<summary>查看代码</summary>
+
+```typescript
+import { create } from 'zustand';
+
+interface NewsletterState {
+  email: string;
+  status: FormStatus;
+  message: string;
+  setEmail: (email: string) => void;
+  setLoading: () => void;
+  setSuccess: () => void;
+  setError: (message: string) => void;
+  reset: () => void;
+}
+
+export const useNewsletterStore = create<NewsletterState>(set => ({
+  email: '',
+  status: FormStatus.Idle,
+  message: '',
+  setEmail: email => set({ email }),
+  setLoading: () => set({ status: FormStatus.Loading, message: '' }),
+  setSuccess: () => set({ status: FormStatus.Success, email: '', message: '' }),
+  setError: message => set({ status: FormStatus.Error, message }),
+  reset: () => set({ status: FormStatus.Idle, message: '' }),
+}));
+
+// 使用示例
+function NewsletterForm() {
+  const { email, status, message, setEmail, setLoading, setSuccess, setError } =
+    useNewsletterStore();
+
+  // ... 组件的其余部分
+}
+```
+
+</details>
+
+#### Jotai 实现
+
+Jotai 提供了原子化的状态管理，支持细粒度更新。
+
+**优点：**
+
+- 原子化状态更新
+- 细粒度响应性
+- 适合复杂的状态依赖
+- 内置 React Suspense 支持
+
+<details>
+<summary>查看代码</summary>
+
+```typescript
+import { atom } from 'jotai';
+
+interface NewsletterState {
+  email: string;
+  status: FormStatus;
+  message: string;
+}
+
+export const newsletterAtom = atom<NewsletterState>({
+  email: '',
+  status: FormStatus.Idle,
+  message: '',
+});
+
+// 派生原子用于单独的状态片段
+export const emailAtom = atom(
+  get => get(newsletterAtom).email,
+  (get, set, email: string) => set(newsletterAtom, { ...get(newsletterAtom), email })
+);
+
+// 动作原子
+export const setLoadingAtom = atom(null, (get, set) =>
+  set(newsletterAtom, { ...get(newsletterAtom), status: FormStatus.Loading, message: '' })
+);
+
+// 使用示例
+function NewsletterForm() {
+  const [email, setEmail] = useAtom(emailAtom);
+  const [status] = useAtom(statusAtom);
+  const [, setLoading] = useAtom(setLoadingAtom);
+
+  // ... 组件的其余部分
+}
+```
+
+</details>
+
+#### Valtio 实现
+
+Valtio 提供了一种基于代理的直观状态更新方法。
+
+**优点：**
+
+- 直观的可变语法
+- 自动跟踪状态更新
+- 与原生 JavaScript 配合良好
+- 出色的 TypeScript 支持
+
+<details>
+<summary>查看代码</summary>
+
+```typescript
+import { proxy } from 'valtio';
+
+interface NewsletterState {
+  email: string;
+  status: FormStatus;
+  message: string;
+}
+
+export const newsletterState = proxy<NewsletterState>({
+  email: '',
+  status: FormStatus.Idle,
+  message: '',
+});
+
+export const newsletterActions = {
+  setEmail: (email: string) => {
+    newsletterState.email = email;
+  },
+  setLoading: () => {
+    newsletterState.status = FormStatus.Loading;
+    newsletterState.message = '';
+  },
+  // ... 其他动作
+};
+
+// 使用示例
+function NewsletterForm() {
+  const state = useSnapshot(newsletterState);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    newsletterActions.setLoading();
+    // ... 剩余逻辑
+  };
+}
+```
+
+</details>
+
+#### 方法比较
+
+每种状态管理方案都有其优势：
+
+1. **Reducer 模式**
+
+   - 传统且易于理解
+   - 适合复杂的状态逻辑
+   - React 内置
+   - 无需额外依赖
+
+2. **Zustand**
+
+   - 最少的样板代码
+   - 简单的 API
+   - 适合小型到中型应用
+   - 易于学习
+
+3. **Jotai**
+
+   - 原子化更新
+   - 细粒度控制
+   - 适合复杂的状态关系
+   - 支持 React Suspense
+
+4. **Valtio**
+   - 直观的 API
+   - 基于代理的更新
+   - 可在 React 外使用
+   - 熟悉的语法
+
+根据需求选择最适合的方法：
+
+- 对于传统的 React 应用使用 **Reducer 模式**
+- 需要简单状态管理和最少设置时使用 **Zustand**
+- 需要细粒度更新时使用 **Jotai**
+- 想要直观的可变风格更新时使用 **Valtio**
+
 ### 3. 表单状态管理
 
 我们使用专门的枚举来管理表单状态，使代码更易维护且类型安全：

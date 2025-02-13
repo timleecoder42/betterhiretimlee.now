@@ -35,6 +35,7 @@ export function Navigation() {
                 src="/timleecoder42.jpg"
                 alt="Tim Lee"
                 fill
+                sizes="(max-width: 768px) 100vw, 32px"
                 className="rounded-full object-cover"
               />
             </div>
