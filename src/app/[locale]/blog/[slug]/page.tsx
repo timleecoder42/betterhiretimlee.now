@@ -5,17 +5,17 @@ import { BlogPost } from '@/components/blog/blog-post';
 import { SUPPORTED_LOCALES } from '@/constants/config';
 import { getPostBySlug, getAllPosts } from '@/lib/blog';
 import { absoluteUrl } from '@/lib/utils';
+import type { PageProps } from '@/types/common';
 
-interface Props {
+type PostPageProps = PageProps & {
   params: Promise<{
-    locale: string;
     slug: string;
   }>;
-}
+};
 
 const formatPageTitle = (title: string) => `${title} | Tim Lee`;
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const post = await getPostBySlug(slug, locale);
 
@@ -53,8 +53,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const revalidate = 3600; // 1 hour in seconds
-
 export async function generateStaticParams() {
   const allPosts = await Promise.all(
     SUPPORTED_LOCALES.map(async locale => {
@@ -69,7 +67,7 @@ export async function generateStaticParams() {
   return allPosts.flat();
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({ params }: PostPageProps) {
   const { locale, slug } = await params;
   const post = await getPostBySlug(slug, locale);
 

@@ -42,11 +42,11 @@ This approach provides better type safety and autocompletion compared to string 
 We use a reducer pattern for centralized state management, making the code more maintainable and predictable:
 
 ```typescript
-interface NewsletterFormState {
+type NewsletterFormState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 type NewsletterFormAction =
   | { type: 'SET_EMAIL'; payload: string }
@@ -125,7 +125,7 @@ Zustand offers a minimalistic approach with hooks-based state management.
 ```typescript
 import { create } from 'zustand';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
@@ -134,7 +134,7 @@ interface NewsletterState {
   setSuccess: () => void;
   setError: (message: string) => void;
   reset: () => void;
-}
+};
 
 export const useNewsletterStore = create<NewsletterState>(set => ({
   email: '',
@@ -175,11 +175,11 @@ Jotai provides atomic state management with fine-grained updates.
 ```typescript
 import { atom } from 'jotai';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 export const newsletterAtom = atom<NewsletterState>({
   email: '',
@@ -227,11 +227,11 @@ Valtio offers a proxy-based approach with intuitive state updates.
 ```typescript
 import { proxy } from 'valtio';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 export const newsletterState = proxy<NewsletterState>({
   email: '',

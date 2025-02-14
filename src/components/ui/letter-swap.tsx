@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 
 import { useMounted } from '@/hooks/useMounted';
 
-interface TextProps {
+type TextProps = {
   label: string;
   reverse?: boolean;
   transition?: AnimationOptions;
@@ -15,13 +15,13 @@ interface TextProps {
   staggerFrom?: 'first' | 'last' | 'center' | number;
   className?: string;
   onClick?: () => void;
-}
+};
 
-interface TextPropsWithInView extends TextProps {
+type TextPropsWithInView = TextProps & {
   inViewOnce?: boolean;
   inViewDelay?: number;
   inViewDirection?: 'up' | 'down';
-}
+};
 
 // Original component from https://www.fancycomponents.dev/docs/components/text/letter-swap
 // Enhanced with:

@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 import { FormStatus } from '@/components/newsletter/types';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
@@ -11,7 +11,7 @@ interface NewsletterState {
   setSuccess: () => void;
   setError: (message: string) => void;
   reset: () => void;
-}
+};
 
 export const useNewsletterStore = create<NewsletterState>(set => ({
   email: '',

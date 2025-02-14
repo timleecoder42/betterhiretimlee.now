@@ -1,8 +1,6 @@
-import { routing } from '@/i18n/routing';
-import type { Locale } from '@/types/common';
-
 // Locale settings
-export const SUPPORTED_LOCALES = routing.locales as readonly Locale[];
+export const SUPPORTED_LOCALES = ['en', 'zh', 'ja'];
+export const DEFAULT_LOCALE = 'en';
 
 // Contact information
 export const CONTACT_EMAIL = 'timleecoder42@gmail.com';

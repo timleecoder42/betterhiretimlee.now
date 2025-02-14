@@ -2,10 +2,10 @@
 
 import { motion } from 'framer-motion';
 
-interface BlogPostHeaderProps {
+type BlogPostHeaderProps = {
   title: string;
   date: string;
-}
+};
 
 export function BlogPostHeader({ title, date }: BlogPostHeaderProps) {
   return (

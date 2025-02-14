@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 import { OgBackground } from '@/components/og/og-background';
 import { OgContentBlog } from '@/components/og/og-content-blog';
 import { OgContentSite } from '@/components/og/og-content-site';
-import { OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT, OG_IMAGE_BACKGROUND } from '@/constants/og';
+import { OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '@/constants/og';
 
 // Force edge runtime for OG image generation
 export const runtime = 'edge';
@@ -26,7 +26,6 @@ const getContent = (type: string, params: URLSearchParams, origin: string) => {
             }}
           />
         ),
-        background: OG_IMAGE_BACKGROUND.light,
       };
     }
     default: {
@@ -50,13 +49,13 @@ const getContent = (type: string, params: URLSearchParams, origin: string) => {
 export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url.replace(/&amp%3B/g, '&').replace(/&amp;/g, '&'));
-    const { component, background } = getContent(
+    const { component } = getContent(
       url.searchParams.get('type') || 'site',
       url.searchParams,
       req.nextUrl.origin
     );
 
-    return new ImageResponse(<OgBackground background={background}>{component}</OgBackground>, {
+    return new ImageResponse(<OgBackground>{component}</OgBackground>, {
       width: OG_IMAGE_WIDTH,
       height: OG_IMAGE_HEIGHT,
     });

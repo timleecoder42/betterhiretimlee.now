@@ -17,11 +17,11 @@ The original component provided a nice hover effect where text would swap with a
 Added the ability to trigger the animation when the component comes into view:
 
 ```typescript
-interface TextPropsWithInView extends TextProps {
+type TextPropsWithInView = TextProps & {
   inViewOnce?: boolean; // Trigger animation only once
   inViewDelay?: number; // Delay before animation starts
   inViewDirection?: 'up' | 'down'; // Animation direction
-}
+};
 ```
 
 This makes it perfect for initial page loads and scroll-based animations. The animation can be configured to run once or multiple times as the element enters the viewport.

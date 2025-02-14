@@ -1,4 +1,4 @@
-export interface Project {
+export type Project = {
   title: string;
   description: string;
   image: string;
@@ -8,9 +8,9 @@ export interface Project {
   stars: number;
   updatedAt: string;
   weight: number;
-}
+};
 
-export interface GitHubRepo {
+export type GitHubRepo = {
   name: string;
   description: string | null;
   html_url: string;
@@ -21,8 +21,8 @@ export interface GitHubRepo {
   fork: boolean;
   archived: boolean;
   topics: string[];
-}
+};
 
-export interface ProjectsSectionProps {
+export type ProjectsSectionProps = {
   projects: Project[];
-}
+};

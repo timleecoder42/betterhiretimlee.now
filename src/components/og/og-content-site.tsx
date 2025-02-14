@@ -1,8 +1,10 @@
-interface OgContentSiteProps {
+import { OG_IMAGE_FONT_FAMILY } from '@/constants/og';
+
+type OgContentSiteProps = {
   title: string;
   subtitle: string;
   imageUrl: string;
-}
+};
 
 export function OgContentSite({ title, subtitle, imageUrl }: OgContentSiteProps) {
   return (
@@ -33,6 +35,7 @@ export function OgContentSite({ title, subtitle, imageUrl }: OgContentSiteProps)
         style={{
           display: 'flex',
           fontSize: 72,
+          fontFamily: OG_IMAGE_FONT_FAMILY,
           fontWeight: 'bold',
           color: '#0f172a',
           textAlign: 'center',
@@ -47,6 +50,7 @@ export function OgContentSite({ title, subtitle, imageUrl }: OgContentSiteProps)
         style={{
           display: 'flex',
           fontSize: 36,
+          fontFamily: OG_IMAGE_FONT_FAMILY,
           color: '#334155',
           textAlign: 'center',
           textShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',

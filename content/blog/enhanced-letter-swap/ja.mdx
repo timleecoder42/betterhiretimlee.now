@@ -17,11 +17,11 @@ excerpt: Framer Motionを使用して、文字スワップアニメーション�
 コンポーネントが表示領域に入ったときにアニメーションをトリガーする機能を追加：
 
 ```typescript
-interface TextPropsWithInView extends TextProps {
+type TextPropsWithInView = TextProps & {
   inViewOnce?: boolean; // アニメーションを一度だけトリガー
   inViewDelay?: number; // アニメーション開始前の遅延
   inViewDirection?: 'up' | 'down'; // アニメーションの方向
-}
+};
 ```
 
 これにより、初期ページ読み込みやスクロールベースのアニメーションに最適になりました。要素がビューポートに入ったときに、アニメーションを1回または複数回実行するように設定できます。

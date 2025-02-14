@@ -42,11 +42,11 @@ export enum NewsletterErrorCode {
 集中的な状態管理のためにReducerパターンを採用し、コードの保守性と予測可能性を向上させています：
 
 ```typescript
-interface NewsletterFormState {
+type NewsletterFormState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 type NewsletterFormAction =
   | { type: 'SET_EMAIL'; payload: string }
@@ -125,7 +125,7 @@ Zustandは、フック・ベースの状態管理を最小限のアプローチ�
 ```typescript
 import { create } from 'zustand';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
@@ -134,7 +134,7 @@ interface NewsletterState {
   setSuccess: () => void;
   setError: (message: string) => void;
   reset: () => void;
-}
+};
 
 export const useNewsletterStore = create<NewsletterState>(set => ({
   email: '',
@@ -175,11 +175,11 @@ Jotaiは、細かい粒度の更新が可能なアトミックな状態管理を
 ```typescript
 import { atom } from 'jotai';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 export const newsletterAtom = atom<NewsletterState>({
   email: '',
@@ -227,11 +227,11 @@ Valtioは、直感的な状態更新を可能にするプロキシベースの�
 ```typescript
 import { proxy } from 'valtio';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 export const newsletterState = proxy<NewsletterState>({
   email: '',

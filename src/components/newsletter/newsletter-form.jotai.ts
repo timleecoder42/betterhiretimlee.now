@@ -2,11 +2,11 @@ import { atom } from 'jotai';
 
 import { FormStatus } from '@/components/newsletter/types';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 const initialState: NewsletterState = {
   email: '',

@@ -1,6 +1,6 @@
 import { OG_IMAGE_FONT_FAMILY } from '@/constants/og';
 
-interface OgContentBlogProps {
+type OgContentBlogProps = {
   title: string;
   date?: string;
   excerpt?: string;
@@ -8,7 +8,7 @@ interface OgContentBlogProps {
     name: string;
     avatar: string;
   };
-}
+};
 
 export function OgContentBlog({ title, date, excerpt, author }: OgContentBlogProps) {
   return (

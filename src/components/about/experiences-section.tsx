@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-interface ExperienceCardProps {
+type ExperienceCardProps = {
   icon: React.ReactNode;
   title: string;
   period: string;
@@ -19,7 +19,7 @@ interface ExperienceCardProps {
     link?: string;
   };
   projectLink?: string;
-}
+};
 
 function ExperienceCard({
   icon,

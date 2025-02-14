@@ -1,9 +1,8 @@
-interface OgBackgroundProps {
+type OgBackgroundProps = {
   children: React.ReactNode;
-  background?: string;
-}
+};
 
-export function OgBackground({ children, background = '#ffffff' }: OgBackgroundProps) {
+export function OgBackground({ children }: OgBackgroundProps) {
   return (
     <div
       style={{
@@ -13,7 +12,7 @@ export function OgBackground({ children, background = '#ffffff' }: OgBackgroundP
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: background,
+        backgroundColor: '#ffffff',
         position: 'relative',
         overflow: 'hidden',
       }}

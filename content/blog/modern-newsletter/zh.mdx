@@ -42,11 +42,11 @@ export enum NewsletterErrorCode {
 我们采用 Reducer 模式进行集中状态管理，使代码更易维护且更可预测：
 
 ```typescript
-interface NewsletterFormState {
+type NewsletterFormState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 type NewsletterFormAction =
   | { type: 'SET_EMAIL'; payload: string }
@@ -125,7 +125,7 @@ Zustand 提供了一种基于 hooks 的极简状态管理方法。
 ```typescript
 import { create } from 'zustand';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
@@ -134,7 +134,7 @@ interface NewsletterState {
   setSuccess: () => void;
   setError: (message: string) => void;
   reset: () => void;
-}
+};
 
 export const useNewsletterStore = create<NewsletterState>(set => ({
   email: '',
@@ -175,11 +175,11 @@ Jotai 提供了原子化的状态管理，支持细粒度更新。
 ```typescript
 import { atom } from 'jotai';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 export const newsletterAtom = atom<NewsletterState>({
   email: '',
@@ -227,11 +227,11 @@ Valtio 提供了一种基于代理的直观状态更新方法。
 ```typescript
 import { proxy } from 'valtio';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 export const newsletterState = proxy<NewsletterState>({
   email: '',

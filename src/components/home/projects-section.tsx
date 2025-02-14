@@ -79,9 +79,9 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-interface ProjectsSectionProps {
+type ProjectsSectionProps = {
   projects: Project[];
-}
+};
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const t = useTranslations('Projects');

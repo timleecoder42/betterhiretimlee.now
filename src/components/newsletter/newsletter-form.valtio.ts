@@ -2,11 +2,11 @@ import { proxy } from 'valtio';
 
 import { FormStatus } from '@/components/newsletter/types';
 
-interface NewsletterState {
+type NewsletterState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 export const newsletterState = proxy<NewsletterState>({
   email: '',

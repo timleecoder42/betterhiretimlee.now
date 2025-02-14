@@ -17,11 +17,11 @@ excerpt: 如何使用 Framer Motion 为字母切换动画组件添加视图触�
 添加了在组件进入视图时触发动画的功能：
 
 ```typescript
-interface TextPropsWithInView extends TextProps {
+type TextPropsWithInView = TextProps & {
   inViewOnce?: boolean; // 仅触发一次动画
   inViewDelay?: number; // 动画开始前的延迟
   inViewDirection?: 'up' | 'down'; // 动画方向
-}
+};
 ```
 
 这使其非常适合初始页面加载和基于滚动的动画。动画可以配置为在元素进入视口时触发一次或多次。

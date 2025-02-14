@@ -1,10 +1,10 @@
 import { FormStatus } from '@/components/newsletter/types';
 
-interface NewsletterFormState {
+type NewsletterFormState = {
   email: string;
   status: FormStatus;
   message: string;
-}
+};
 
 type NewsletterFormAction =
   | { type: 'SET_EMAIL'; payload: string }
