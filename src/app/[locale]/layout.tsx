@@ -10,6 +10,7 @@ import { ThemeProvider } from 'next-themes';
 import { Footer } from '@/components/layout/footer';
 import { Navigation } from '@/components/layout/navigation';
 import { BackgroundGradient } from '@/components/ui/background-gradient';
+import { SUPPORTED_LOCALES } from '@/constants/config';
 import { isValidLocale } from '@/i18n/utils';
 import type { PageProps } from '@/types/common';
 
@@ -52,6 +53,10 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
       images: [`/api/og?title=Tim%20Lee&subtitle=${encodeURIComponent(subtitle)}`],
     },
   };
+}
+
+export async function generateStaticParams() {
+  return SUPPORTED_LOCALES.map(locale => ({ locale }));
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
