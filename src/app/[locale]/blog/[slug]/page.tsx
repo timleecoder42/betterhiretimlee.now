@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   return {
     title: formatPageTitle(post.title),
     description: post.excerpt,
+    authors: [{ name: 'Tim Lee', url: 'https://betterhiretimlee.now' }],
     openGraph: {
       title: formatPageTitle(post.title),
       description: post.excerpt,

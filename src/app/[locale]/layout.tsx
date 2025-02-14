@@ -35,6 +35,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
     title,
     description,
+    authors: [{ name: 'Tim Lee', url: 'https://betterhiretimlee.now' }],
     openGraph: {
       title,
       description,
