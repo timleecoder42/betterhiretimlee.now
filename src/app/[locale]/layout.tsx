@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
   const title = t('title');
   const description = t('description');
   const subtitle = homeT('subtitle');
+  const ogImageUrl = `/api/og?title=Tim%20Lee&subtitle=${encodeURIComponent(subtitle)}`;
 
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
@@ -41,17 +42,19 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
       description,
       images: [
         {
-          url: `/api/og?title=Tim%20Lee&subtitle=${encodeURIComponent(subtitle)}`,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
         },
       ],
+      siteName: 'Tim Lee',
+      url: `/${locale}`,
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [`/api/og?title=Tim%20Lee&subtitle=${encodeURIComponent(subtitle)}`],
+      images: [ogImageUrl],
     },
   };
 }

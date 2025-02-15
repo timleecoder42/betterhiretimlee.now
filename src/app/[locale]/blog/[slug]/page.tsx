@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import { BlogPost } from '@/components/blog/blog-post';
 import { SUPPORTED_LOCALES } from '@/constants/config';
 import { getPostBySlug, getAllPosts } from '@/lib/blog';
-import { absoluteUrl } from '@/lib/utils';
 import type { PageProps } from '@/types/common';
 
 type PostPageProps = PageProps & {
@@ -23,11 +22,10 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     return {};
   }
 
-  const ogImageUrl = absoluteUrl(
-    `/api/og?type=blog&title=${encodeURIComponent(post.title)}&date=${encodeURIComponent(post.date)}${post.excerpt ? `&excerpt=${encodeURIComponent(post.excerpt)}` : ''}`
-  );
+  const ogImageUrl = `/api/og?type=blog&title=${encodeURIComponent(post.title)}&date=${encodeURIComponent(post.date)}${post.excerpt ? `&excerpt=${encodeURIComponent(post.excerpt)}` : ''}`;
 
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
     title: formatPageTitle(post.title),
     description: post.excerpt,
     authors: [{ name: 'Tim Lee', url: 'https://betterhiretimlee.now' }],
@@ -35,7 +33,6 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       title: formatPageTitle(post.title),
       description: post.excerpt,
       type: 'article',
-      url: absoluteUrl(`/${locale}/blog/${post.slug}`),
       images: [
         {
           url: ogImageUrl,
@@ -44,6 +41,8 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
           alt: post.title,
         },
       ],
+      siteName: 'Tim Lee',
+      url: `/${locale}/blog/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
