@@ -56,6 +56,9 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
   };
 }
 
+// Add revalidation period - 1 hour
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   return SUPPORTED_LOCALES.map(locale => ({ locale }));
 }

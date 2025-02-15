@@ -54,6 +54,9 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   };
 }
 
+// Add revalidation period - 1 hour
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   const allPosts = await Promise.all(
     SUPPORTED_LOCALES.map(async locale => {

@@ -2,6 +2,9 @@ import { HeroSection } from '@/components/home/hero-section';
 import { ProjectsContainer } from '@/components/home/projects-container';
 import { SUPPORTED_LOCALES } from '@/constants/config';
 
+// Add revalidation period - 1 hour
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   return SUPPORTED_LOCALES.map(locale => ({ locale }));
 }

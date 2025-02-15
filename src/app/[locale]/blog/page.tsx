@@ -3,6 +3,9 @@ import { SUPPORTED_LOCALES } from '@/constants/config';
 import { getAllPosts } from '@/lib/blog';
 import type { PageProps } from '@/types/common';
 
+// Add revalidation period - 1 hour
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   return SUPPORTED_LOCALES.map(locale => ({ locale }));
 }
