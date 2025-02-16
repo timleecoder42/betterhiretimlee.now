@@ -1,6 +1,6 @@
 # Better Hire Tim Lee Now!
 
-A modern, internationalized portfolio website built with Next.js 15 and React 19.
+A modern, internationalized portfolio and blog website built with Next.js 15 and React 19.
 
 ## Features
 
@@ -36,6 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [Next.js 15](https://nextjs.org/) - React framework
 - [React 19](https://react.dev/) - UI library
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) - MDX support
 - [next-intl](https://next-intl-docs.vercel.app/) - Internationalization
 - [next-themes](https://github.com/pacocoursey/next-themes) - Theme management
 - [Framer Motion](https://www.framer.com/motion/) - Animation library
@@ -45,6 +46,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [Lucide Icons](https://lucide.dev/) - Beautiful & consistent icons
 - [@vercel/og](https://vercel.com/docs/functions/edge-functions/og-image-generation) - Dynamic OG image generation
 - [Buttondown](https://buttondown.email/) - Newsletter service
+- [Vercel](https://vercel.com/) - Hosting
 
 ## Social Sharing
 
