@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getTranslations } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { ThemeProvider } from 'next-themes';
 
 import { Footer } from '@/components/layout/footer';
@@ -70,6 +70,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   if (!isValidLocale(locale)) {
     notFound();
   }
+
+  // Enable static rendering
+  setRequestLocale(locale);
 
   // Providing all messages to the client
   // side is the easiest way to get started

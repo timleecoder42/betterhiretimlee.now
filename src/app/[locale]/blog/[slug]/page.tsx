@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { setRequestLocale } from 'next-intl/server';
 
 import { BlogPost } from '@/components/blog/blog-post';
 import { SUPPORTED_LOCALES } from '@/constants/config';
 import { getPostBySlug, getAllPosts } from '@/lib/blog';
 import type { PageProps } from '@/types/common';
-
 type PostPageProps = PageProps & {
   params: Promise<{
     slug: string;
@@ -69,6 +69,10 @@ export async function generateStaticParams() {
 
 export default async function BlogPostPage({ params }: PostPageProps) {
   const { locale, slug } = await params;
+
+  // Enable static rendering
+  setRequestLocale(locale);
+
   const post = await getPostBySlug(slug, locale);
 
   if (!post) {
