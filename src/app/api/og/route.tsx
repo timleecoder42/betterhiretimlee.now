@@ -6,9 +6,6 @@ import { OgContentBlog } from '@/components/og/og-content-blog';
 import { OgContentSite } from '@/components/og/og-content-site';
 import { OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '@/constants/og';
 
-// Force edge runtime for OG image generation
-export const runtime = 'edge';
-
 const getContent = (type: string, params: URLSearchParams, origin: string) => {
   switch (type) {
     case 'blog': {

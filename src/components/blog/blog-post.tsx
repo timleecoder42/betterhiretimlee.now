@@ -95,6 +95,7 @@ const components = {
         src={src || ''}
         alt={alt}
         fill
+        sizes="(max-width: 768px) 100vw"
         className={`rounded-lg object-cover ${className}`}
         {...props}
       />

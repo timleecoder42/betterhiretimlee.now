@@ -1,4 +1,4 @@
-import { GITHUB_USERNAME } from '@/constants/config';
+import { GITHUB_USERNAME, REVALIDATE_TIME } from '@/constants/config';
 import type { Project, GitHubRepo } from '@/types/project';
 
 // Helper function to extract weight from topics
@@ -26,9 +26,9 @@ async function fetchGitHubRepos(): Promise<GitHubRepo[]> {
           Authorization: `token ${process.env.GITHUB_TOKEN}`,
         }),
       },
-      // next: {
-      //   revalidate: REVALIDATE_TIME.EVERY_MINUTE,
-      // },
+      next: {
+        revalidate: REVALIDATE_TIME.EVERY_MINUTE,
+      },
     }
   );
 

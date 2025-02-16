@@ -9,7 +9,7 @@ export async function generateStaticParams() {
   return SUPPORTED_LOCALES.map(locale => ({ locale }));
 }
 
-export default async function Home() {
+export default function Home() {
   return (
     <div className="min-h-screen w-full">
       <HeroSection />

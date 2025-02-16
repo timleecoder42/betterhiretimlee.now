@@ -64,7 +64,13 @@ function ExperienceCard({
                   transition={{ duration: 0.2 }}
                   className="relative w-6 h-6 sm:w-8 sm:h-8"
                 >
-                  <Image src={company.logo} alt={company.name} fill className="object-contain" />
+                  <Image
+                    src={company.logo}
+                    alt={company.name}
+                    fill
+                    sizes="(max-width: 640px) 32px"
+                    className="object-contain"
+                  />
                 </motion.div>
               ) : (
                 <motion.div

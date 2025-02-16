@@ -54,7 +54,7 @@ export function HeroSection() {
               ) : (
                 <React.Fragment key={i}>
                   <span className="whitespace-nowrap">{part.replace(/ /g, '\u00A0')}</span>
-                  <span className="whitespace-nowrap text-gray-900 dark:text-white">
+                  <span className="whitespace-nowrap text-gray-800 dark:text-gray-100">
                     <LetterSwapPingPongInView
                       label="Tim Lee"
                       staggerFrom={'first'}

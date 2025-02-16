@@ -39,7 +39,7 @@ export const LetterSwapPingPongInView = ({
   },
   staggerDuration = 0.03,
   staggerFrom = 'first',
-  className,
+  className = '',
   onClick,
   inViewOnce = true,
   inViewDelay = 0.6,

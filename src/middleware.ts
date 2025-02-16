@@ -1,20 +1,8 @@
-import type { NextRequest } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 
 import { routing } from '@/i18n/routing';
 
-const intlMiddleware = createMiddleware(routing);
-
-export default function middleware(request: NextRequest) {
-  const response = intlMiddleware(request);
-
-  // Add cache control headers
-  if (response) {
-    response.headers.set('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=60');
-  }
-
-  return response;
-}
+export default createMiddleware(routing);
 
 // Specify each path explicitly for static analysis
 export const config = {

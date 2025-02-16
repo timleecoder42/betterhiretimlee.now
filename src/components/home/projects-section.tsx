@@ -36,7 +36,13 @@ function ProjectCard({ project }: { project: Project }) {
         onClick={() => project.demoUrl && window.open(project.demoUrl, '_blank')}
       >
         <div className="absolute inset-0 cursor-pointer">
-          <Image src={project.image} alt={project.title} fill className="object-cover" />
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover"
+          />
           {/* Overlay with hover text */}
           <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors duration-300">
             {project.demoUrl && (

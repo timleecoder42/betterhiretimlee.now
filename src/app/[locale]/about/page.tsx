@@ -8,6 +8,6 @@ export async function generateStaticParams() {
   return SUPPORTED_LOCALES.map(locale => ({ locale }));
 }
 
-export default async function AboutPage() {
+export default function AboutPage() {
   return <AboutContent />;
 }
