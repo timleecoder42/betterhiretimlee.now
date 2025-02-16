@@ -19,8 +19,8 @@ import '@/styles/globals.css';
 /**
  * Next.js Revalidation Configuration
  * ---------------------------------
- * revalidate = 86400 means:
- * 1. Pages are cached for 1 day (86400 seconds)
+ * revalidate = 31536000 means:
+ * 1. Pages are cached for 1 year (31536000 seconds)
  * 2. When a new request comes after the cache period:
  *    - The cached (stale) version is served first
  *    - Next.js triggers a regeneration in the background
@@ -29,13 +29,14 @@ import '@/styles/globals.css';
  *
  * Important notes:
  * - This is a root layout setting, affecting all pages under this layout
- * - Cache is automatically reset on new deployments
+ * - Cache is automatically reset on new deployments, so long cache is safe
  * - Individual pages can override this with their own revalidate value
  * - Individual fetch requests can set a lower revalidate time to increase
  *   revalidation frequency for specific data within a route
  * - Static pages will be served from the edge cache for better performance
+ * - Setting a long cache maximizes edge performance for static content
  */
-export const revalidate = 86400; // Cache for 1 day
+export const revalidate = 31536000; // Cache for 1 year
 
 const inter = Inter({ subsets: ['latin'] });
 
