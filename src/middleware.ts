@@ -14,6 +14,7 @@ export const config = {
     // - .*\\..*\$ (files with extensions like favicon.ico)
     '/((?!api|_next|static|.*\\..*$).*)',
     // Match all paths that start with supported locales
+    '/',
     '/en/:path*',
     '/zh/:path*',
     '/ja/:path*',
