@@ -3,6 +3,9 @@ import { SUPPORTED_LOCALES } from '@/constants/config';
 import { getAllPosts } from '@/lib/blog';
 import type { PageProps } from '@/types/common';
 
+// Force static generation for all pages
+export const dynamic = 'force-static';
+
 // Add revalidation period - 1 hour
 export const revalidate = 3600;
 
