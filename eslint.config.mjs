@@ -42,6 +42,7 @@ const eslintConfig = [
           },
         },
       ],
+      'import/newline-after-import': ['error', { count: 1 }],
     },
   },
 ];

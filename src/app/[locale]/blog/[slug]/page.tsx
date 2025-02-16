@@ -6,6 +6,7 @@ import { BlogPost } from '@/components/blog/blog-post';
 import { SUPPORTED_LOCALES } from '@/constants/config';
 import { getPostBySlug, getAllPosts } from '@/lib/blog';
 import type { PageProps } from '@/types/common';
+
 type PostPageProps = PageProps & {
   params: Promise<{
     slug: string;
