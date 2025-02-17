@@ -5,10 +5,13 @@ import { routing } from '@/i18n/routing';
 export default createMiddleware(routing);
 
 export const config = {
-  // Match both internationalized pathnames and direct paths that need to be redirected
+  // Match all paths that need language routing
   matcher: [
-    // Match all pathnames except for
-    // - /api, /_next, /_vercel, /static, /public, /favicon.ico
-    '/((?!api|_next|_vercel|static|public|favicon.ico).*)',
+    '/',
+    '/(en|zh|ja)/:path*',
+    // Match specific routes without language prefix that need redirection
+    '/about',
+    '/blog',
+    '/blog/:path*',
   ],
 };
