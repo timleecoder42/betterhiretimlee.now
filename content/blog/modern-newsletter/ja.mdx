@@ -395,8 +395,9 @@ const response = await fetch('https://api.buttondown.email/v1/subscribers', {
 
 1. `types.ts` - 共有の型とenum
 2. `newsletter-form.tsx` - メインのフォームコンポーネント
-3. `newsletter-form.variants.ts` - アニメーションのバリアント
-4. `validations/newsletter.ts` - バリデーションスキーマとエラー処理
+3. `newsletter-form.reducer.ts` - 状態管理のReducer
+4. `newsletter-form.variants.ts` - アニメーションのバリアント
+5. `validations/newsletter.ts` - バリデーションスキーマとエラー処理
 
 この関心の分離により、コードの保守性とテスト容易性が向上しています。
 

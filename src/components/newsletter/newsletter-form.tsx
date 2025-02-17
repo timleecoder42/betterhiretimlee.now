@@ -93,6 +93,7 @@ export function NewsletterForm() {
             onChange={e => dispatch({ type: 'SET_EMAIL', payload: e.target.value })}
             className="w-full px-5 py-3 rounded-full bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 shadow-sm"
             required
+            autoComplete="email"
             disabled={state.status === FormStatus.Loading || state.status === FormStatus.Success}
           />
           <div className="h-4 relative">
