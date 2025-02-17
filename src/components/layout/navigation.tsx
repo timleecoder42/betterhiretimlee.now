@@ -32,11 +32,12 @@ export function Navigation() {
           >
             <div className="flex-shrink-0 relative w-8 h-8 transition-all duration-300 group-hover:-rotate-6 group-hover:scale-110">
               <Image
-                src="/timleecoder42.jpg"
+                src="/timleecoder42-small.jpg"
                 alt="Tim Lee"
                 fill
                 sizes="(max-width: 768px) 32px"
                 className="rounded-full object-cover"
+                priority
               />
             </div>
             <span className="text-lg font-semibold tracking-tight">Tim Lee</span>
