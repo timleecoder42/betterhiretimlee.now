@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
           height: 630,
         },
       ],
-      siteName: 'Tim Lee',
+      siteName: 'BetterHireTimLee.Now',
       url: `/${locale}`,
     },
     twitter: {

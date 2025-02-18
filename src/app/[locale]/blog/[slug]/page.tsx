@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
           alt: post.title,
         },
       ],
-      siteName: 'Tim Lee',
+      siteName: 'BetterHireTimLee.Now',
       url: `/${locale}/blog/${post.slug}`,
     },
     twitter: {
