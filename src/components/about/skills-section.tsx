@@ -22,7 +22,7 @@ const skills = [
     icon: <CpuChipIcon className="w-6 h-6" />,
     gradient: 'from-purple-500/10 to-indigo-600/10 dark:from-purple-400/10 dark:to-indigo-500/10',
     iconGradient: 'from-purple-500 to-indigo-600 dark:from-purple-400 dark:to-indigo-500',
-    items: ['Cursor', 'Copilot/v0.dev/bolt.new', 'Devin', 'ChatGPT', 'DeepSeek'],
+    items: ['Cursor', 'Copilot/v0.dev/bolt.new', 'Calude 3.7', 'ChatGPT', 'DeepSeek'],
   },
   {
     category: 'skillCategories.web3',
